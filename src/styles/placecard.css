@@ -1,0 +1,66 @@
+.place-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.place-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.place-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.place-content {
+  padding: 1rem;
+}
+
+.place-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0a3d62; 
+  margin-bottom: 0.5rem;
+}
+
+.place-desc {
+  font-size: 0.95rem;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.place-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #f96d5b;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.place-btn:hover {
+  background-color: #e55a49;
+}
+
+
+@media (max-width: 768px) {
+  .place-img {
+    height: 150px;
+  }
+  .place-name {
+    font-size: 1.1rem;
+  }
+  .place-desc {
+    font-size: 0.9rem;
+  }
+}

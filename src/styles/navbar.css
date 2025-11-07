@@ -16,7 +16,7 @@
   justify-content: space-between;
 }
 
-/* Logo */
+
 .nav-logo {
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@
   letter-spacing: 0.5px;
 }
 
-/* Links */
+
 .nav-links {
   display: flex;
   gap: 1.5rem;
@@ -53,7 +53,7 @@
   color: #f96d5b; 
 }
 
-/* Hamburger (mobile) */
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -88,7 +88,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
-  /* Open state */
+
   .nav-links.open {
     transform: translateY(0);
     opacity: 1;
@@ -100,7 +100,6 @@
   }
 }
 
-/* Hamburger Animation */
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
