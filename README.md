@@ -5,7 +5,7 @@ Discover Lebanon’s southern city like a true local, easily and authentically.
 
 ---
 
-## 📖 Overview
+## 📖Project description
 
 **GoLocal** is a city discovery web application designed to help users explore the best of **Saida**, Lebanon.  
 The platform highlights top-rated spots including restaurants, cafés, entertainment venues, and cultural landmarks curated by locals for an authentic experience.
@@ -56,16 +56,6 @@ GoLocal currently covers (and can be expanded to include):
 
 ---
 
-## 🚀 Future Enhancements
-
-- 🔹 Integrate **interactive maps** (Google Maps API or Leaflet).  
-- 🔹 Add **real-time database** for user-contributed locations.  
-- 🔹 Implement **search and filter** by category or rating.  
-- 🔹 Expand coverage to **Beirut, Tyre, Tripoli, and other Lebanese cities**.  
-- 🔹 Add **authentication** and user profiles for saving favorite spots.  
-
----
-
 ## ⚙️ Installation & Setup
 
 To run the project locally:
@@ -82,6 +72,31 @@ npm install
 
 # Run the development server
 npm run dev
+
+---
+
+## 🖼️ Screenshots
+
+//not ready yet
+
+---
+
+## 🚀 Future Enhancements
+
+- 🔹 Integrate **interactive maps** (Google Maps API or Leaflet).  
+- 🔹 Add **real-time database** for user-contributed locations.  
+- 🔹 Implement **search and filter** by category or rating.  
+- 🔹 Expand coverage to **Beirut, Tyre, Tripoli, and other Lebanese cities**.  
+- 🔹 Add **authentication** and user profiles for saving favorite spots.  
+
+---
+
+👨‍💻 Author
+
+**Developed by:** Mariam El Jarkas
+**Course Project :** CSCI426
+**University:** LIU 
+**Instructor:** Dr Bassel Dhaini
 
 
 
