@@ -1,4 +1,4 @@
-# 🌍 GoLocal — Saida City Discovery Web App
+# 🌍 GoLocal - Saida City Discovery Web App
 
 GoLocal connects locals and visitors with Saida’s top gems from food and fun to culture and history.  
 Discover Lebanon’s southern city like a true local, easily and authentically.
@@ -8,7 +8,7 @@ Discover Lebanon’s southern city like a true local, easily and authentically.
 ## 📖 Overview
 
 **GoLocal** is a city discovery web application designed to help users explore the best of **Saida**, Lebanon.  
-The platform highlights top-rated spots — including restaurants, cafés, entertainment venues, and cultural landmarks curated by locals for an authentic experience.
+The platform highlights top-rated spots including restaurants, cafés, entertainment venues, and cultural landmarks curated by locals for an authentic experience.
 
 This project aims to simplify city exploration by helping people discover Saida’s most recommended and enjoyable places without relying on paid tour guides or generic travel platforms.  
 Currently focused on **Saida**, the app is built with scalability in mind for future expansion across other Lebanese cities.
@@ -17,7 +17,7 @@ Currently focused on **Saida**, the app is built with scalability in mind for fu
 
 ## ✨ Features
 
-- 🏙️ **City-Centric Exploration:** Focused on Saida, Lebanon — built for locals and visitors alike.  
+- 🏙️ **City-Centric Exploration:** Focused on Saida, Lebanon built for locals and visitors alike.  
 - 🍽️ **Categorized Listings:** Organized by category (food, cafés, entertainment, history, culture, outdoor, etc.).  
 - 💡 **Locally Curated Recommendations:** All places are selected from personal experiences, community opinions, and trusted sources.  
 - 📱 **Responsive Design:** Fully responsive layout for mobile and desktop.  
@@ -47,12 +47,12 @@ Currently focused on **Saida**, the app is built with scalability in mind for fu
 
 GoLocal currently covers (and can be expanded to include):
 
-- 🍔 **Food & Dining** — Burgers, Lebanese cuisine, street food, fine dining.  
-- ☕ **Cafés & Chill Spots** — Coffee shops, dessert places, board game cafés.  
-- 🎭 **Culture & Heritage** — Historical landmarks, souks, museums, mosques.  
-- 🏖️ **Outdoors & Leisure** — Beaches, promenades, parks, seaside views.  
-- 🎮 **Entertainment** — Arcades, board game lounges, cinemas, local events.  
-- 🛍️ **Shops & Souks** — Local markets, handmade goods, and crafts.  
+- 🍔 **Food & Dining** : Burgers, Lebanese cuisine, street food, fine dining.  
+- ☕ **Cafés & Chill Spots**  :  Coffee shops, dessert places, board game cafés.  
+- 🎭 **Culture & Heritage**  : Historical landmarks, souks, museums, mosques.  
+- 🏖️ **Outdoors & Leisure**  : Beaches, promenades, parks, seaside views.  
+- 🎮 **Entertainment**  : Arcades, board game lounges, cinemas, local events.  
+- 🛍️ **Shops & Souks**  : Local markets, handmade goods, and crafts.  
 
 ---
 
