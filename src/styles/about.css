@@ -1,7 +1,7 @@
 .about-page {
   max-width: 900px;
-  margin: 2rem auto;
-  padding: 1rem;
+  margin: 0 auto;          
+  padding: 100px 1rem 1rem;
   line-height: 1.6;
   font-family: Arial, sans-serif;
 }

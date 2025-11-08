@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="nav-container">
-        {/* Logo Section */}
+        {}
         <div className="nav-logo">
           <Link to="/" onClick={closeMenu}>
             {/* <img src={logo} alt="GoLocal Logo" /> */}
@@ -27,7 +27,7 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Hamburger (mobile) */}
+        {}
         <div
           className={`hamburger ${isMenuOpen ? "active" : ""}`}
           onClick={toggleMenu}
@@ -37,7 +37,7 @@ function Navbar() {
           <span></span>
         </div>
 
-        {/* Navigation Links */}
+        {}
         <nav className={`nav-links ${isMenuOpen ? "open" : ""}`}>
           <Link to="/" onClick={closeMenu}>Home</Link>
           <Link to="/about" onClick={closeMenu}>About</Link>

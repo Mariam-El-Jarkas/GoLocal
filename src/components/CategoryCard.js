@@ -1,11 +1,12 @@
 import React from "react";
 import "../styles/categorycard.css";
 
-function CategoryCard({ title, image }) {
+function CategoryCard({ title, icon, children }) {
   return (
     <div className="category-card">
-      <img src={image} alt={title} className="category-img" />
+      <div className="category-icon">{icon}</div>
       <h3 className="category-title">{title}</h3>
+      {children} {}
     </div>
   );
 }
