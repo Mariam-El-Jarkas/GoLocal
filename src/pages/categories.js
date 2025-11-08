@@ -9,7 +9,7 @@ import {
 
 function Categories() {
   const categories = [
-    { title: "Food", icon: <FaUtensils />, path: "/category/food" }, // ✅ FIXED
+    { title: "Food", icon: <FaUtensils />, path: "/category/food" }, 
     { title: "Board Games", icon: <FaChess />, path: "/category/board-games" },
     { title: "Culture", icon: <FaLandmark />, path: "/category/culture" },
     { title: "History", icon: <FaHistory />, path: "/category/history" },

@@ -8,6 +8,13 @@ import Categories from "./pages/categories.js";
 import Contact from "./pages/Contact.js";
 import PlaceDetails from "./pages/PlaceDetails.js";
 import Food from "./pages/categories/Food.js";
+import BoardGames from "./pages/categories/BoardGames.js";
+import Culture from "./pages/categories/Culture.js";
+import History from "./pages/categories/History.js";
+import Beaches from "./pages/categories/Beaches.js";
+import CoffeeShops from "./pages/categories/CoffeeShops.js";
+import Shopping from "./pages/categories/Shopping.js";
+import Parks from "./pages/categories/Parks.js";
 
 function App() {
   return (
@@ -20,6 +27,13 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/category/food" element={<Food />} />
+          <Route path="/category/board-games" element={<BoardGames />} />
+          <Route path="/category/culture" element={<Culture />} />
+          <Route path="/category/history" element={<History />} />
+          <Route path="/category/beaches" element={<Beaches />} />
+          <Route path="/category/coffee-shops" element={<CoffeeShops />} />
+          <Route path="/category/shopping" element={<Shopping />} />
+          <Route path="/category/parks" element={<Parks />} />
           <Route path="/place/:id" element={<PlaceDetails />} />
         </Routes>
       </main>
