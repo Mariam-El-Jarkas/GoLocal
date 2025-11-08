@@ -7,6 +7,8 @@ import About from "./pages/About.js";
 import Categories from "./pages/categories.js";
 import Contact from "./pages/Contact.js";
 import PlaceDetails from "./pages/PlaceDetails.js";
+
+// Category pages
 import Food from "./pages/categories/Food.js";
 import BoardGames from "./pages/categories/BoardGames.js";
 import Culture from "./pages/categories/Culture.js";

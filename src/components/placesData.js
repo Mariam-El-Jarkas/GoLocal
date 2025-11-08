@@ -36,7 +36,6 @@ const placesData = [
     image: "/src/assets/images/places/home-lebanese.jpg",
     description: "Authentic Lebanese home-cooked meals."
   },
-
   // Board Games
   {
     id: 5,
@@ -54,7 +53,7 @@ const placesData = [
     image: "/src/assets/images/places/board-club.jpg",
     description: "Play strategy and party board games with friends."
   },
-
+  
   // Culture
   {
     id: 7,
@@ -163,5 +162,4 @@ const placesData = [
     description: "Beautiful garden with exotic plants."
   }
 ];
-
 export default placesData;

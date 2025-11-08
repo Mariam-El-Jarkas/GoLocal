@@ -1,14 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/placecard.css";
 
-function PlaceCard({ name, image, description }) {
+function PlaceCard({ place }) {
   return (
     <div className="place-card">
-      <img src={image} alt={name} className="place-img" />
+      <img src={place.image} alt={place.name} className="place-img" />
       <div className="place-content">
-        <h3 className="place-name">{name}</h3>
-        <p className="place-desc">{description}</p>
-        <a href="/details" className="place-btn">View Details</a>
+        <h3 className="place-name">{place.name}</h3>
+        <p className="place-desc">{place.description}</p>
+        <Link to={`/place/${place.id}`} className="place-btn">
+          View Details
+        </Link>
       </div>
     </div>
   );
