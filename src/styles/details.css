@@ -1,0 +1,33 @@
+.details-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.details-page h1 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.details-page .place-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.details-page p {
+  margin-bottom: 1rem;
+  color: #34495e;
+}
+
+.place-category,
+.place-address {
+  font-weight: bold;
+}
+
+.place-description {
+  line-height: 1.6;
+}

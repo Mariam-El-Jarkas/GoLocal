@@ -1,48 +1,37 @@
-
-export const categories = [
-  { title: "Food", image: "/assets/images/categories/food.jpg" },
-  { title: "Cafes", image: "/assets/images/categories/cafe.jpg" },
-  { title: "Board Games", image: "/assets/images/categories/boardgames.jpg" },
-  { title: "Beaches", image: "/assets/images/categories/beach.jpg" },
-  { title: "Culture", image: "/assets/images/categories/culture.jpg" },
-  { title: "History", image: "/assets/images/categories/history.jpg" }
-];
-
-export const places = [
+const placesData = [
   {
-    name: "Multiverse Board Games",
-    category: "Board Games",
-    image: "/assets/images/places/multiverse.jpg",
-    description: "A fun spot for board game lovers of all ages. Friendly staff and great variety."
-  },
-  {
+    id: 1,
     name: "Fries Lab",
     category: "Food",
-    image: "/assets/images/places/frieslab.jpg",
-    description: "The best burgers and fries in Saida, according to locals."
+    address: "123 Saida Street",
+    image: "/src/assets/images/places/fries-lab.jpg",
+    description: "Famous for its delicious burgers and fries. A must-visit for food lovers in Saida."
   },
   {
-    name: "Sea Breeze Beach",
-    category: "Beaches",
-    image: "/assets/images/places/seabreeze.jpg",
-    description: "Relax by the Mediterranean sea with beautiful views and clean sand."
+    id: 2,
+    name: "Multiverse Board Games",
+    category: "Board Games",
+    address: "45 Downtown Saida",
+    image: "/src/assets/images/places/multiverse.jpg",
+    description: "Enjoy a wide range of board games with friends. Cozy atmosphere and great snacks."
   },
   {
-    name: "Old City Souk",
+    id: 3,
+    name: "Saida Sea Castle",
     category: "History",
-    image: "/assets/images/places/oldcity.jpg",
-    description: "Explore Saida’s historic souk with traditional shops and architecture."
+    address: "Sea Road, Saida",
+    image: "/src/assets/images/places/sea-castle.jpg",
+    description: "Historic landmark dating back to the Crusades. Perfect for sightseeing and photography."
   },
   {
-    name: "Cafe Mosaic",
-    category: "Cafes",
-    image: "/assets/images/places/cafemosaic.jpg",
-    description: "A cozy café with amazing coffee and pastries."
-  },
-  {
-    name: "Seafood Delight",
-    category: "Food",
-    image: "/assets/images/places/seafooddelight.jpg",
-    description: "Fresh seafood by the coast, locals’ favorite spot."
+    id: 4,
+    name: "Beirut Street Café",
+    category: "Coffee Shops",
+    address: "Main Street, Saida",
+    image: "/src/assets/images/places/beirut-cafe.jpg",
+    description: "Relax with a cup of coffee and enjoy the local vibe of Saida."
   }
+  // add more places as needed
 ];
+
+export default placesData;
