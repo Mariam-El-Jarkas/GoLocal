@@ -56,30 +56,6 @@ GoLocal currently covers (and can be expanded to include):
 - 🛍️ **Shops & Souks**  : Local markets, handmade goods, and crafts.  
 
 ---
-
-## ⚙️ Installation & Setup
-
-To run the project locally:
-
-```bash
-# Clone this repository
-git clone https://github.com/<Mariam-El-Jarkas>/golocal.git
-
-# Navigate to the project directory
-cd golocal
-
-# Install dependencies
-npm install
-
-# Run the development server
-npm run dev
-
----
-
-## 🖼️ Screenshots
-
-//not ready yet
-
 ---
 
 ## 🚀 Future Enhancements
@@ -98,6 +74,31 @@ npm run dev
 **Course Project :** CSCI426
 **University:** LIU 
 **Instructor:** Dr Bassel Dhaini
+
+---
+
+## 🖼️ Screenshots
+
+//not ready yet
+ 
+---
+
+## ⚙️ Installation & Setup
+
+To run the project locally:
+
+```bash
+# Clone this repository
+git clone https://github.com/<Mariam-El-Jarkas>/golocal.git
+
+# Navigate to the project directory
+cd golocal
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
 
 
 
