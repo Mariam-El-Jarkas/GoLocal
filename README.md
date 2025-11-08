@@ -39,7 +39,88 @@ Currently focused on **Saida**, the app is built with scalability in mind for fu
 
 ## 🗂️ Project Structure
 
-//not ready yet
+GoLocal/  
+├── node_modules/
+├── public/                     
+├── src/
+│   ├── assets/                   
+│   │   ├── images/               
+│   │   └── logo.png                
+│   │
+│   ├── components/                 
+│   │   ├── Navbar.js              
+│   │   ├── Footer.js              
+│   │   ├── IntroSection.js         
+│   │   ├── CategoryCard.js         
+│   │   ├── PlaceCard.js            
+│   │   ├── ResponsiveMenu.js       
+│   │   └── placesData.js           
+│   │
+│   ├── pages/── categories/
+│   │   ├── Beaches.js
+│   │   ├── BoardGames.js
+│   │   ├── CoffeeShops.js
+│   │   ├── Culture.js
+│   │   ├── Food.js
+│   │   ├── History.js
+│   │   ├── Parks.js
+│   │   ├── Shopping.js
+│   │   ├── About.js
+│   │   ├── categories.js
+│   │   ├── Contact.js
+│   │   ├── Home.js
+│   │   └── PlaceDetails.js                      
+│   │   ├── Home.js             
+│   │   ├── About.js               
+│   │   ├── Categories.js          
+│   │   ├── Contact.js            
+│   │   └── PlaceDetails.js       
+│   │
+│   ├── pages/
+│   │   ├── About.js
+│   │   ├── Contact.js
+│   │   ├── Home.js
+│   │   ├── PlaceDetails.js
+│   │   ├── categories.js
+│   │   └── categories/
+│   │       ├── Beaches.js
+│   │       ├── BoardGames.js
+│   │       ├── CoffeeShops.js
+│   │       ├── Culture.js
+│   │       ├── Food.js
+│   │       ├── History.js
+│   │       ├── Parks.js
+│   │       └── Shopping.js
+│   ├── styles/
+│   │   ├── about.css
+│   │   ├── Beaches.css
+│   │   ├── BoardGames.css
+│   │   ├── categories.css
+│   │   ├── categorycard.css
+│   │   ├── CoffeeShops.css
+│   │   ├── contact.css
+│   │   ├── Culture.css
+│   │   ├── details.css
+│   │   ├── food.css
+│   │   ├── footer.css
+│   │   ├── History.css
+│   │   ├── home.css
+│   │   ├── introsection.css
+│   │   ├── navbar.css
+│   │   ├── Parks.css
+│   │   ├── placecard.css
+│   │   └── Shopping.css
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│   ├── index.css
+│   ├── logo.svg
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── README.md
 
 ---
 
