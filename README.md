@@ -39,43 +39,21 @@ Currently focused on **Saida**, the app is built with scalability in mind for fu
 
 ## 🗂️ Project Structure
 
-GoLocal/  
+GoLocal/
 ├── node_modules/
-├── public/                     
+├── public/
 ├── src/
-│   ├── assets/                   
-│   │   ├── images/               
-│   │   └── logo.png                
-│   │
-│   ├── components/                 
-│   │   ├── Navbar.js              
-│   │   ├── Footer.js              
-│   │   ├── IntroSection.js         
-│   │   ├── CategoryCard.js         
-│   │   ├── PlaceCard.js            
-│   │   ├── ResponsiveMenu.js       
-│   │   └── placesData.js           
-│   │
-│   ├── pages/── categories/
-│   │   ├── Beaches.js
-│   │   ├── BoardGames.js
-│   │   ├── CoffeeShops.js
-│   │   ├── Culture.js
-│   │   ├── Food.js
-│   │   ├── History.js
-│   │   ├── Parks.js
-│   │   ├── Shopping.js
-│   │   ├── About.js
-│   │   ├── categories.js
-│   │   ├── Contact.js
-│   │   ├── Home.js
-│   │   └── PlaceDetails.js                      
-│   │   ├── Home.js             
-│   │   ├── About.js               
-│   │   ├── Categories.js          
-│   │   ├── Contact.js            
-│   │   └── PlaceDetails.js       
-│   │
+│   ├── assets/
+│   │   ├── images/
+│   │   └── logo.png
+│   ├── components/
+│   │   ├── Navbar.js
+│   │   ├── Footer.js
+│   │   ├── IntroSection.js
+│   │   ├── CategoryCard.js
+│   │   ├── PlaceCard.js
+│   │   ├── ResponsiveMenu.js
+│   │   └── placesData.js
 │   ├── pages/
 │   │   ├── About.js
 │   │   ├── Contact.js
@@ -121,7 +99,6 @@ GoLocal/
 ├── package.json
 ├── package-lock.json
 └── README.md
-
 ---
 
 ## 🧭 Categories
