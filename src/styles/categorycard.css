@@ -16,7 +16,7 @@
 .category-icon {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  color: #3498db;
+  color: #2e7d32;
 }
 
 .category-title {
@@ -27,7 +27,7 @@
   display: inline-block;
   margin-top: 0.5rem;
   padding: 0.4rem 0.8rem;
-  background-color: #3498db;
+  background-color:  #2e7d32;
   color: white;
   border-radius: 6px;
   text-decoration: none;
@@ -35,5 +35,5 @@
 }
 
 .view-button:hover {
-  background-color: #2980b9;
+  background-color: #2e7d32;
 }

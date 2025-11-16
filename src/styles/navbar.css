@@ -34,22 +34,22 @@
 }
 
 .nav-links a {
-  position: relative;         /* needed for underline */
+  position: relative;     
   text-decoration: none;
   color: #333333;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
-/* 🔥 Underline animation */
+
 .nav-links a::after {
   content: "";
   position: absolute;
-  bottom: -4px;       /* distance under text */
+  bottom: -4px;      
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: #2e7d32; /* green underline */
+  background-color: #2e7d32; 
   transition: width 0.3s ease;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .nav-links a:hover::after {
-  width: 100%;        /* underline grows smoothly */
+  width: 100%;      
 }
 
 .nav-links a:active {
@@ -104,7 +104,6 @@
     visibility: visible;
   }
 
-  /* mobile logo */
   .nav-logo img {
     width: 65px;
   }

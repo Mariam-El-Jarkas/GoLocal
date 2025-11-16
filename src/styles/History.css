@@ -52,7 +52,7 @@
     font-size: 0.85rem;
     color: #7f8c8d;
 }
-/* Categories grid below Top Places */
+
 .categories-preview {
   margin-top: 3rem;
 }
@@ -70,7 +70,6 @@
   justify-items: center;
 }
 
-/* Responsive for small screens */
 @media (max-width: 900px) {
   .categories-grid {
     grid-template-columns: 1fr;

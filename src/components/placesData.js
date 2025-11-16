@@ -1,3 +1,4 @@
+// Import images for all the places
 import soubraImg from '../assets/images/soubra.png';
 import senorPizzaImg from '../assets/images/senor-pizza.png';
 import toninosImg from '../assets/images/toninos.png';
@@ -20,9 +21,10 @@ import theSpotImg from '../assets/images/the-spot-saida.png';
 import oscarMallImg from '../assets/images/oscar-mall.png';
 import soukSaidaImg from '../assets/images/souk-saida.png';
 
-
+// Main array of places with details, images, and categories
 const placesData = [
-  // Food
+
+  // Food category
   {
     id: 1,
     name: "Soubra",
@@ -39,7 +41,7 @@ const placesData = [
     subCategory: "Pizza",
     address: "Chamaa Road, B Village, Saïda, Lebanon",
     image: senorPizzaImg,
-    description: "Famous pizza and pasta restaurant in Saida authentic Western‑style pizzas."
+    description: "Famous pizza and pasta restaurant in Saida, authentic Western‑style pizzas."
   },
   {
     id: 3,
@@ -48,7 +50,7 @@ const placesData = [
     subCategory: "Dessert / Crepes",
     address: "Murjan Square, Saïda, Lebanon",
     image: toninosImg,
-    description: "Delicious crepes and sweet treats a top dessert spot in Saida."
+    description: "Delicious crepes and sweet treats, a top dessert spot in Saida."
   },
   {
     id: 4,
