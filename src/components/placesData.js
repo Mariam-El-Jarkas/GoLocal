@@ -1,165 +1,231 @@
+import soubraImg from '../assets/images/soubra.png';
+import senorPizzaImg from '../assets/images/senor-pizza.png';
+import toninosImg from '../assets/images/toninos.png';
+import beitMeryamImg from '../assets/images/beit-meryam.png';
+import multiverseImg from '../assets/images/multiverse.png';
+import diceCafeImg from '../assets/images/dice-cafe.png';
+import soapMuseumImg from '../assets/images/soap-museum.png';
+import debbanePalaceImg from '../assets/images/debbane-palace.png';
+import seaCastleImg from '../assets/images/sea-castle.png';
+import saintLouisCastleImg from '../assets/images/saint-louis-castle.png';
+import saidaCountryClubImg from '../assets/images/saida-country-club.png';
+import saoudiParkImg from '../assets/images/saoudi-park.png';
+import sheikhZayedParkImg from '../assets/images/sheikh-zayed-park.png';
+import starbucksImg from '../assets/images/starbucks.png';
+import dropCafeImg from '../assets/images/drop-cafe.png';
+import blendImg from '../assets/images/blend.png';
+import storiesImg from '../assets/images/stories.png';
+import heyaImg from '../assets/images/heya.png';
+import theSpotImg from '../assets/images/the-spot-saida.png';
+import oscarMallImg from '../assets/images/oscar-mall.png';
+import soukSaidaImg from '../assets/images/souk-saida.png';
+
+
 const placesData = [
   // Food
   {
     id: 1,
-    name: "Fries Lab",
+    name: "Soubra",
     category: "Food",
     subCategory: "Burgers",
-    address: "123 Saida Street",
-    image: "/src/assets/images/places/fries-lab.jpg",
-    description: "Famous for its delicious burgers and fries. A must-visit for food lovers in Saida."
+    address: "Houssam El‑Deen Rafic Hariri Street, Saïda, Lebanon",
+    image: soubraImg,
+    description: "One of the best burger places in Saida, known for its juicy, flavorful burgers."
   },
   {
     id: 2,
-    name: "Pizza Paradise",
+    name: "Senor Pizza",
     category: "Food",
     subCategory: "Pizza",
-    address: "22 Downtown Saida",
-    image: "/src/assets/images/places/pizza-paradise.jpg",
-    description: "Tasty pizzas with fresh ingredients."
+    address: "Chamaa Road, B Village, Saïda, Lebanon",
+    image: senorPizzaImg,
+    description: "Famous pizza and pasta restaurant in Saida authentic Western‑style pizzas."
   },
   {
     id: 3,
-    name: "Sweet Tooth Desserts",
+    name: "Toninos",
     category: "Food",
-    subCategory: "Dessert",
-    address: "10 Main Street, Saida",
-    image: "/src/assets/images/places/sweet-tooth.jpg",
-    description: "Cakes, pastries, and sweet treats for everyone."
+    subCategory: "Dessert / Crepes",
+    address: "Murjan Square, Saïda, Lebanon",
+    image: toninosImg,
+    description: "Delicious crepes and sweet treats a top dessert spot in Saida."
   },
   {
     id: 4,
-    name: "Home Lebanese Kitchen",
+    name: "Beit Meryam",
     category: "Food",
-    subCategory: "Home Lebanese",
-    address: "45 Cedar Lane, Saida",
-    image: "/src/assets/images/places/home-lebanese.jpg",
-    description: "Authentic Lebanese home-cooked meals."
+    subCategory: "Lebanese / Mediterranean",
+    address: "Abra, Saïda, Lebanon",
+    image: beitMeryamImg,
+    description: "A warm, home‑style restaurant in Abra, Saida serving authentic Lebanese and Mediterranean cuisine in a family atmosphere."
   },
+
   // Board Games
   {
     id: 5,
-    name: "Multiverse Board Games",
+    name: "Multiverse",
     category: "Board Games",
-    address: "45 Downtown Saida",
-    image: "/src/assets/images/places/multiverse.jpg",
-    description: "Enjoy a wide range of board games with friends. Cozy atmosphere and great snacks."
+    subCategory: "Board / Tabletop / Escape",
+    address: "Oscar Mall, Saïda, Lebanon",
+    image: multiverseImg,
+    description: "A board‑game café where you can play board & card games, join Dungeons & Dragons campaigns, or try escape‑room style adventures."
   },
   {
     id: 6,
-    name: "City Board Club",
+    name: "Dice Cafe",
     category: "Board Games",
-    address: "10 Fun Street, Saida",
-    image: "/src/assets/images/places/board-club.jpg",
-    description: "Play strategy and party board games with friends."
+    subCategory: "Board Games / Café",
+    address: "Hlaliyeh, Saïda, Lebanon",
+    image: diceCafeImg,
+    description: "A cozy café centered around board games, where you can play classics or try new favorites while sipping coffee."
   },
-  
-  // Culture
+
+  // Culture / Museums
   {
     id: 7,
-    name: "Saida Art Museum",
+    name: "Audi Soap Museum",
     category: "Culture",
-    address: "5 Art Lane, Saida",
-    image: "/src/assets/images/places/art-museum.jpg",
-    description: "Exhibits local and international art."
+    subCategory: "Museum",
+    address: "Al-Moutran Street, Haret Audi, Old Town Saïda, Lebanon",
+    image: soapMuseumImg,
+    description: "Museum in a historic soap factory, showing traditional soap‑making techniques and Levantine craftsmanship."
   },
   {
     id: 8,
-    name: "Cultural Center Saida",
+    name: "Debbane Palace Museum",
     category: "Culture",
-    address: "20 Culture Avenue, Saida",
-    image: "/src/assets/images/places/cultural-center.jpg",
-    description: "Workshops, exhibitions, and cultural events."
+    subCategory: "Historical Mansion",
+    address: "Old Town Saïda, Lebanon",
+    image: debbanePalaceImg,
+    description: "An elegant Ottoman-era mansion turned museum, showcasing local history and architecture."
   },
 
   // History
   {
     id: 9,
-    name: "Saida Sea Castle",
+    name: "Sidon Sea Castle",
     category: "History",
-    address: "Sea Road, Saida",
-    image: "/src/assets/images/places/sea-castle.jpg",
-    description: "Historic landmark dating back to the Crusades. Perfect for sightseeing and photography."
+    subCategory: "Castle",
+    address: "Coastal Road, Saïda, Lebanon",
+    image: seaCastleImg,
+    description: "A historic Crusader fortress built on a small island, connected to the mainland by a bridge."
   },
   {
     id: 10,
-    name: "Saida Fortress",
+    name: "Castle of Saint Louis & Ziri Lighthouse",
     category: "History",
-    address: "Fort Street, Saida",
-    image: "/src/assets/images/places/fortress.jpg",
-    description: "Historic site with guided tours."
+    subCategory: "Castle / Lighthouse",
+    address: "Acropolis Hill / Ziri Island, Saïda, Lebanon",
+    image: saintLouisCastleImg,
+    description: "Ruined Crusader castle on the hill and the nearby lighthouse on Ziri island — key historical landmarks."
   },
 
-  // Beaches
+  // Leisure / Private Pools
   {
     id: 11,
-    name: "Sunset Beach",
-    category: "Beaches",
-    address: "Coastal Road, Saida",
-    image: "/src/assets/images/places/sunset-beach.jpg",
-    description: "Relax on sandy beaches with clear water."
-  },
-  {
-    id: 12,
-    name: "Golden Sands",
-    category: "Beaches",
-    address: "15 Beach Avenue, Saida",
-    image: "/src/assets/images/places/golden-sands.jpg",
-    description: "Popular beach with cafes and water sports."
-  },
-
-  // Coffee Shops
-  {
-    id: 13,
-    name: "Beirut Street Café",
-    category: "Coffee Shops",
-    address: "Main Street, Saida",
-    image: "/src/assets/images/places/beirut-cafe.jpg",
-    description: "Relax with a cup of coffee and enjoy the local vibe of Saida."
-  },
-  {
-    id: 14,
-    name: "Coffee Corner",
-    category: "Coffee Shops",
-    address: "7 Main Street, Saida",
-    image: "/src/assets/images/places/coffee-corner.jpg",
-    description: "Local specialty coffee and snacks."
-  },
-
-  // Shopping
-  {
-    id: 15,
-    name: "Saida Mall",
-    category: "Shopping",
-    address: "12 Shopping Avenue, Saida",
-    image: "/src/assets/images/places/saida-mall.jpg",
-    description: "Various stores and entertainment options."
-  },
-  {
-    id: 16,
-    name: "Bazaar Street",
-    category: "Shopping",
-    address: "Market Lane, Saida",
-    image: "/src/assets/images/places/bazaar.jpg",
-    description: "Traditional shopping street with local goods."
+    name: "Saida Country Club",
+    category: "Leisure",
+    subCategory: "Private Pools",
+    address: "Qrayeh Village, Saïda, Lebanon",
+    image: saidaCountryClubImg,
+    description: "Private pool facility — women‑only on Monday‑Wednesday, mixed on other days."
   },
 
   // Parks
   {
-    id: 17,
-    name: "Central Park Saida",
+    id: 12,
+    name: "Eng. Mohammad Zeher Al‑Saoudi Park",
     category: "Parks",
-    address: "Park Road, Saida",
-    image: "/src/assets/images/places/central-park.jpg",
-    description: "Open green spaces and walking trails."
+    subCategory: "Public Garden / Park",
+    address: "Saïda, Lebanon",
+    image: saoudiParkImg,
+    description: "A large, family‑friendly public park with green spaces, walking paths, fountains, and playgrounds."
+  },
+  {
+    id: 13,
+    name: "Sheikh Zayed Public Park",
+    category: "Parks",
+    subCategory: "Public Park",
+    address: "H968+VWP, Saïda, Lebanon",
+    image: sheikhZayedParkImg,
+    description: "A lush city park in Saida with walking paths, children's playground, and green areas. Established in cooperation with the UAE."
+  },
+
+  // Coffee Shops
+  {
+    id: 16,
+    name: "Starbucks",
+    category: "Coffee Shops",
+    subCategory: "International Café",
+    address: "The Spot Saida, Saïda, Lebanon",
+    image: starbucksImg,
+    description: "A well-known international coffee chain offering a variety of drinks and snacks."
+  },
+  {
+    id: 17,
+    name: "Drop",
+    category: "Coffee Shops",
+    subCategory: "Local Café",
+    address: "Ghassan Naffaa Street, Saïda, Lebanon",
+    image: dropCafeImg,
+    description: "A cozy coffee shop in Saida, perfect for hanging out, working, or chilling with friends."
   },
   {
     id: 18,
-    name: "Botanical Garden",
-    category: "Parks",
-    address: "Garden Street, Saida",
-    image: "/src/assets/images/places/botanical-garden.jpg",
-    description: "Beautiful garden with exotic plants."
+    name: "Blend",
+    category: "Coffee Shops",
+    subCategory: "Local Café",
+    address: "Haret Saida, Saïda, Lebanon",
+    image: blendImg,
+    description: "Modern coffee lounge known for its quality brews and relaxing ambiance."
+  },
+  {
+    id: 19,
+    name: "Stories",
+    category: "Coffee Shops",
+    subCategory: "Local Café",
+    address: "Main Street, Saïda, Lebanon",
+    image: storiesImg,
+    description: "A café in Saida where stories meet coffee — great for socializing, reading, or relaxing."
+  },
+  {
+    id: 20,
+    name: "Heya",
+    category: "Coffee Shops",
+    subCategory: "Women‑Only Café",
+    address: "Baasiri Street, Saïda, Lebanon",
+    image: heyaImg,
+    description: "A women‑only coffee shop, offering a safe and welcoming space exclusively for women."
+  },
+
+  // Shopping
+  {
+    id: 21,
+    name: "The Spot Saida",
+    category: "Shopping",
+    subCategory: "Mall",
+    address: "Nazih El Bizri Boulevard, Sidon, Lebanon",
+    image: theSpotImg,
+    description: "Modern shopping mall with a variety of stores, cafés, and entertainment options."
+  },
+  {
+    id: 22,
+    name: "Oscar Mall",
+    category: "Shopping",
+    subCategory: "Mall",
+    address: "Nazih El-Bizri Boulevard, Dakerman area, Saida, Lebanon",
+    image: oscarMallImg,
+    description: "Popular mall in Saida with retail stores, cafés, and entertainment options."
+  },
+  {
+    id: 23,
+    name: "Souk Saida",
+    category: "Shopping",
+    subCategory: "Traditional Market",
+    address: "Fakhreddine, Sidon, Lebanon",
+    image: soukSaidaImg,
+    description: "Traditional market offering local goods, spices, handicrafts, and souvenirs."
   }
 ];
+
 export default placesData;

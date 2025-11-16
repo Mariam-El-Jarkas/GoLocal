@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
-// import logo from "../assets/logo.png"; // for logo later
+import logo from "../assets/images/Logo.png";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,10 +20,10 @@ function Navbar() {
         {}
         <div className="nav-logo">
           <Link to="/" onClick={closeMenu}>
-            {/* <img src={logo} alt="GoLocal Logo" /> */}
-            <div className="placeholder-logo">🌍</div>
+            <img src={logo} alt="GoLocal Logo" />
+            {/* <div className="placeholder-logo">🌍</div>
 
-            <span>GoLocal</span>
+            <span>GoLocal</span> */}
           </Link>
         </div>
 

@@ -13,7 +13,7 @@ function Categories() {
     { title: "Board Games", icon: <FaChess />, path: "/category/board-games" },
     { title: "Culture", icon: <FaLandmark />, path: "/category/culture" },
     { title: "History", icon: <FaHistory />, path: "/category/history" },
-    { title: "Beaches", icon: <FaUmbrellaBeach />, path: "/category/beaches" },
+    // { title: "Beaches", icon: <FaUmbrellaBeach />, path: "/category/beaches" },
     { title: "Coffee Shops", icon: <FaCoffee />, path: "/category/coffee-shops" },
     { title: "Shopping", icon: <FaShoppingBag />, path: "/category/shopping" },
     { title: "Parks", icon: <FaTree />, path: "/category/parks" },

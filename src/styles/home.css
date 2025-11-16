@@ -1,66 +1,157 @@
 .home-page {
   display: flex;
   flex-direction: column;
+  gap: 3rem;
+  padding: 1rem 2rem;
+  margin-top: 3rem; /* space below nav */
+}
+
+/* Saida intro section */
+.saida-intro {
+  min-height: 50vh; /* occupy ~50% viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem; /* space from nav */
+}
+
+.saida-intro .intro-container {
+  display: flex;
+  align-items: center;
   gap: 2rem;
-  padding: 1rem;
+  flex-wrap: wrap; /* responsive for small screens */
+  width: 100%;
+}
+
+/* Image ~45% of container */
+.saida-intro .intro-image {
+  width: 45%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* Text ~55% of container */
+.saida-intro .intro-text {
+  width: 55%;
+  min-width: 300px;
+}
+
+.saida-intro .intro-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2e7d32; /* green headings */
+}
+
+.saida-intro .intro-text .intro-subtitle {
+  font-size: 1.8rem;
+  color: #2e7d32;
+  margin-bottom: 0.75rem;
+}
+
+.saida-intro .intro-text p {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: #34495e; /* keep paragraph dark gray */
 }
 
 /* Section headings */
-.categories-preview h2,
-.places-preview h2 {
+.places-preview h2,
+.categories-preview h2 {
   text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2e7d32; /* green headings */
+}
+
+/* Categories grid */
+.categories-preview .categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
   margin-bottom: 1rem;
-  color: #2c3e50;
 }
 
-/* Category cards container */
-.category-cards {
+/* See All Categories button container */
+.categories-preview .see-all-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center; /* center cards horizontally */
+  justify-content: center; /* center button */
+  margin-top: 1rem;
 }
 
-/* Top places container */
-.place-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center; /* center cards horizontally */
-}
-
-/* See All buttons */
-.see-all-btn {
-  display: inline-block;
-  margin: 1rem auto 0;
-  background: #2ecc71;
+.categories-preview .see-all-btn {
+  display: inline-block;      
+  background-color: #2ecc71;  /* green button */
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.2s;
   text-align: center;
+  transition: background 0.2s;
 }
 
-/* Center the button */
-.categories-preview .see-all-btn,
+.categories-preview .see-all-btn:hover {
+  background-color: #27ae60; /* darker green hover */
+}
+
+/* View Details button */
+.view-button {
+  display: inline-block;
+  background-color: #2e7d32; /* match headings green */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.view-button:hover {
+  background-color: #1b5e20; /* darker green on hover */
+}
+
+/* Top Places container (3 per row) */
+.place-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+/* PlaceCard hover effect */
+.place-cards .place-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.place-cards .place-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* See All buttons for Top Places (if used) */
 .places-preview .see-all-btn {
   display: block;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.see-all-btn:hover {
-  background: #27ae60;
+  margin: 1rem auto 0;
 }
 
 /* Responsive for small screens */
-@media (max-width: 600px) {
-  .category-cards,
-  .place-cards {
+@media (max-width: 900px) {
+  .saida-intro .intro-container {
     flex-direction: column;
     align-items: center;
+    text-align: center;
+  }
+
+  .saida-intro .intro-image,
+  .saida-intro .intro-text {
+    width: 100%;
+  }
+
+  .categories-preview .categories-grid,
+  .place-cards {
+    grid-template-columns: 1fr; /* 1 per row on mobile */
   }
 }
