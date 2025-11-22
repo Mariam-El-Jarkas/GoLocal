@@ -2,7 +2,6 @@
 import React from "react";
 import PlaceCard from "../components/PlaceCard.js";
 import placesData from "../components/placesData.js";
-import { FaUtensils, FaChess,FaLandmark,FaHistory, FaCoffee,FaShoppingBag, FaTree} from "react-icons/fa";
 import "../styles/home.css";
 
 function Home() {

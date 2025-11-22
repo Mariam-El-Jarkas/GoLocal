@@ -9,8 +9,9 @@ function Food() {
   // Filter the data to include only places in the "Food" category
   const foodPlaces = placesData.filter(place => place.category === "Food");
 
-  // Group food places by their subcategory (e.g., "Bakery", "Seafood", etc.)
-  const subCategories = {};
+  const subCategories = {}; //empty object 
+
+
   foodPlaces.forEach(place => {
     const sub = place.subCategory || "General"; // Default group if no subcategory is defined
     if (!subCategories[sub]) {
@@ -25,6 +26,7 @@ function Food() {
 
       {/* Display all the food subcategories and their top places */}
       <div className="food-grid">
+        {/* Object.keys() returns an array of all the keys in the object. */}
         {Object.keys(subCategories).map((sub, index) => (
           
           // Section representing a single food subcategory

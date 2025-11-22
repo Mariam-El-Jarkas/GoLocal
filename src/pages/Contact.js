@@ -1,28 +1,32 @@
-//imports
+// imports
 import React, { useState } from "react";
 import "../styles/contact.css";
 
 function Contact() {
-  // State to store the form inputs (name, email, message)
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  // Separate state variables for each input
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  // I use this to update the form values whenever the user types
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // we defines a function named handleSubmit using an arrow function.
+  // It takes one parameter e, which is the event object automatically
+  //  passed when the form is submitted.
 
-  // Temporary submit function (just shows an alert for now)
-  // Later this can be replaced with API/email integration
+  // Handle submit when form is submitted
   const handleSubmit = (e) => {
-    e.preventDefault();
+
+    // Temporary alert (replace later with API/email integration)
     alert("Message submitted! (Functionality to be implemented later)");
 
     // Clear form after submitting
-    setFormData({ name: "", email: "", message: "" });
+    handleReset();
+  };
+
+  // Reset form fields to empty
+  const handleReset = () => {
+    setName("");
+    setEmail("");
+    setMessage("");
   };
 
   return (
@@ -38,29 +42,26 @@ function Contact() {
         {/* Name input */}
         <input
           type="text"
-          name="name"
           placeholder="Your Name"
-          value={formData.name}
-          onChange={handleChange}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
         />
 
         {/* Email input */}
         <input
           type="email"
-          name="email"
           placeholder="Your Email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
         {/* Message text box */}
         <textarea
-          name="message"
           placeholder="Your Message"
-          value={formData.message}
-          onChange={handleChange}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           required
         ></textarea>
 

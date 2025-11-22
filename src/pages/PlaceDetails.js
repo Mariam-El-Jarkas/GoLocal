@@ -1,9 +1,7 @@
+//imports
 import React from "react";
-// useParams allows accessing dynamic parameters from the URL
 import { useParams } from "react-router-dom";
-// Import the dataset containing all places
 import placesData from "../components/placesData.js";
-// Import CSS for styling this page
 import "../styles/details.css";
 
 function PlaceDetails() {
@@ -38,5 +36,4 @@ function PlaceDetails() {
   );
 }
 
-// Export the page for use in routes
 export default PlaceDetails;

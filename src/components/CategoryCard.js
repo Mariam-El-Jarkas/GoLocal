@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/categorycard.css";
 
 function CategoryCard({ title, icon, children }) {
-
+//used in category page
   return (
     <div className="category-card">
 
@@ -12,8 +12,8 @@ function CategoryCard({ title, icon, children }) {
 
       {/* Category title */}
       <h3 className="category-title">{title}</h3>
-
-      {/*child elements (like buttons or links) */}
+{/* 
+      child elements (like buttons or links) */}
       {children}
     </div>
   );

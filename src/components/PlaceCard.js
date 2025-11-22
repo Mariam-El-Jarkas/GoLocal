@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/placecard.css";
 
+//used in home page
+
 function PlaceCard({ place }) {
 
   return (
