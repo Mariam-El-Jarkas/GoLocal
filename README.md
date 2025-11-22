@@ -39,7 +39,82 @@ Currently focused on **Saida**, the app is built with scalability in mind for fu
 
 ## 🗂️ Project Structure
 
-<img width="334" height="852" alt="image" src="https://github.com/user-attachments/assets/7512bfc3-fb86-48ca-9218-556cdc0444c7" />
+GOLOCAL/
+├── node_modules/
+├── public/
+├── src/
+│   ├── assets/
+│   │   └── images/
+│   │       ├── belt-meryam.png
+│   │       ├── blend.png
+│   │       ├── debbane-palace.png
+│   │       ├── dice-cafe.png
+│   │       ├── drop-cafe.png
+│   │       ├── heya.png
+│   │       ├── Logo.png
+│   │       ├── multiverse.png
+│   │       ├── oscar-mail.png
+│   │       ├── saida-country-club.png
+│   │       ├── saida.png
+│   │       ├── saint-louis-castle.png
+│   │       ├── saoudi-park.png
+│   │       ├── sea-castle.png
+│   │       ├── senor-pizza.png
+│   │       ├── sheikh-zayed-park.png
+│   │       ├── soap-museum.png
+│   │       ├── soubra.png
+│   │       ├── souk-saida.png
+│   │       ├── starbucks.png
+│   │       ├── stories.png
+│   │       ├── the-spot-saida.png
+│   │       └── toninos.png
+│   ├── components/
+│   │   ├── CategoryCard.js
+│   │   ├── Footer.js
+│   │   ├── Navbar.js
+│   │   ├── PlaceCard.js
+│   │   └── placesData.js
+│   ├── pages/
+│   │   ├── categories/
+│   │   │   ├── BoardGames.js
+│   │   │   ├── CoffeeShops.js
+│   │   │   ├── Culture.js
+│   │   │   ├── Food.js
+│   │   │   ├── History.js
+│   │   │   ├── Parks.js
+│   │   │   └── Shopping.js
+│   │   ├── About.js
+│   │   ├── categories.js
+│   │   ├── Contact.js
+│   │   ├── Home.js
+│   │   └── PlaceDetails.js
+│   ├── styles/
+│   │   ├── about.css
+│   │   ├── BoardGames.css
+│   │   ├── categories.css
+│   │   ├── categorycard.css
+│   │   ├── CoffeeShops.css
+│   │   ├── contact.css
+│   │   ├── Culture.css
+│   │   ├── details.css
+│   │   ├── food.css
+│   │   ├── footer.css
+│   │   ├── History.css
+│   │   ├── home.css
+│   │   ├── navbar.css
+│   │   ├── Parks.css
+│   │   ├── placecard.css
+│   │   ├── Shopping.css
+│   ├── App.css
+│   ├── App.js
+│   ├── index.js
+│   ├── logo.svg
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+├── .gitignore
+├── package-lock.json
+├── package.json
+└── README.md
 
 
 ---
@@ -79,7 +154,21 @@ GoLocal currently covers (and can be expanded to include):
 
 ## 🖼️ Screenshots
 
-//not ready yet
+<img width="1280" height="616" alt="image" src="https://github.com/user-attachments/assets/9fe82aae-52b8-41c0-88f7-8c108241b71e" />
+<img width="1280" height="791" alt="image" src="https://github.com/user-attachments/assets/89fc461b-22f9-4193-9b1d-c82a37e090e5" />
+<img width="1280" height="805" alt="image" src="https://github.com/user-attachments/assets/1f05e0fe-600d-4ad2-aec9-200bb44b4d97" />
+<img width="1280" height="693" alt="image" src="https://github.com/user-attachments/assets/508b74b2-5ef1-46c0-9550-de9d9dafc520" />
+<img width="1280" height="884" alt="image" src="https://github.com/user-attachments/assets/3aef7231-ddb6-4604-82d9-8cf79cff2973" />
+<img width="1280" height="849" alt="image" src="https://github.com/user-attachments/assets/f7cbd31c-4f0b-409c-99ae-ffd94c7f7fff" />
+<img width="1280" height="611" alt="image" src="https://github.com/user-attachments/assets/7e4bfc57-f9f3-4d97-acd2-4d14c03f264e" />
+
+
+## 🖼️  Responsive Screenshots
+
+<img width="364" height="805" alt="image" src="https://github.com/user-attachments/assets/e492721c-6602-4d96-977c-b97f6caea3c0" />
+<img width="376" height="805" alt="image" src="https://github.com/user-attachments/assets/68b8313e-ab91-4542-9a32-cc7991f54748" />
+<img width="372" height="794" alt="image" src="https://github.com/user-attachments/assets/12f7c7f5-aab4-4431-b8ec-cde8d881b537" />
+
  
 ---
 
