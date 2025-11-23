@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/GoLocal/static/css/main.2735f299.css",
+    "main.js": "/GoLocal/static/js/main.418dda54.js",
+    "static/media/saida.png": "/GoLocal/static/media/saida.d73fe5b68a30c9c1fdca.png",
+    "static/media/soubra.png": "/GoLocal/static/media/soubra.3a17f5b4d9f579813fe8.png",
+    "static/media/saoudi-park.png": "/GoLocal/static/media/saoudi-park.e2380e9b9dcb0e8da981.png",
+    "static/media/beit-meryam.png": "/GoLocal/static/media/beit-meryam.d3e5bd540e83e9b883ac.png",
+    "static/media/stories.png": "/GoLocal/static/media/stories.76b043a863881d35ba46.png",
+    "static/media/sea-castle.png": "/GoLocal/static/media/sea-castle.2851cfed88a764b49078.png",
+    "static/media/sheikh-zayed-park.png": "/GoLocal/static/media/sheikh-zayed-park.b921e08a87fa728eda3b.png",
+    "static/media/Logo.png": "/GoLocal/static/media/Logo.5d5e87ed74cb11344f61.png",
+    "static/media/the-spot-saida.png": "/GoLocal/static/media/the-spot-saida.67b54144044574b55108.png",
+    "static/media/saint-louis-castle.png": "/GoLocal/static/media/saint-louis-castle.53969928b59eab71505b.png",
+    "static/media/saida-country-club.png": "/GoLocal/static/media/saida-country-club.a7ab850527af1484233b.png",
+    "static/media/debbane-palace.png": "/GoLocal/static/media/debbane-palace.9b3d58de7718d6f569f3.png",
+    "static/media/soap-museum.png": "/GoLocal/static/media/soap-museum.f3a7f4c56770910b3bf7.png",
+    "static/media/dice-cafe.png": "/GoLocal/static/media/dice-cafe.4f74d917f6eb0bd8cca6.png",
+    "static/media/starbucks.png": "/GoLocal/static/media/starbucks.24ecfbc55f701c1d6e5c.png",
+    "static/media/multiverse.png": "/GoLocal/static/media/multiverse.c1ba13a9be8f97563998.png",
+    "static/media/senor-pizza.png": "/GoLocal/static/media/senor-pizza.344a8bb46e212e9fbc74.png",
+    "static/media/drop-cafe.png": "/GoLocal/static/media/drop-cafe.581516389a5eb98e8354.png",
+    "static/media/souk-saida.png": "/GoLocal/static/media/souk-saida.49ae73c1a4cf11b9e972.png",
+    "static/media/oscar-mall.png": "/GoLocal/static/media/oscar-mall.419192a4c0a821d5bfbc.png",
+    "static/media/heya.png": "/GoLocal/static/media/heya.98013ce004a90cad73a7.png",
+    "static/media/blend.png": "/GoLocal/static/media/blend.94ce349eef552461a738.png",
+    "static/media/toninos.png": "/GoLocal/static/media/toninos.09a3b882ad7439a96d50.png",
+    "index.html": "/GoLocal/index.html",
+    "main.2735f299.css.map": "/GoLocal/static/css/main.2735f299.css.map",
+    "main.418dda54.js.map": "/GoLocal/static/js/main.418dda54.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2735f299.css",
+    "static/js/main.418dda54.js"
+  ]
+}
