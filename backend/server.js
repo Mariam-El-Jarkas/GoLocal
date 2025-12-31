@@ -1,48 +1,71 @@
+// Load environment variables first
 require('dotenv').config();
-
-console.log('DB URL:', process.env.DATABASE_URL);
 
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const { Pool } = require('pg'); // PostgreSQL
 
+// Import routes
 const categoryRoutes = require('./routes/categories');
 const subcategoryRoutes = require('./routes/subcategories');
 const placeRoutes = require('./routes/places');
 const contactRoutes = require('./routes/contacts');
 const adminRoutes = require('./routes/admin');
 
+// Initialize Express
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-// 1. Create uploads folder
-const uploadsPath = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsPath)) {
-  fs.mkdirSync(uploadsPath, { recursive: true });
-  console.log('✅ Created uploads folder');
-}
-
-// 2. Middleware - IMPORTANT: No body-parser for file uploads!
-app.use(cors());
-app.use(express.json()); // For JSON data
-app.use(express.urlencoded({ extended: true })); // For URL-encoded data
-
-// 3. Serve static files
-app.use('/uploads', express.static(uploadsPath));
-
-// Test route
-app.get('/', (req, res) => {
-  res.send('GoLocal backend is running');
+// --------------------
+// PostgreSQL Connection
+// --------------------
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // Required for Render Postgres
+  },
 });
 
+pool.connect()
+  .then(() => console.log('✅ Connected to PostgreSQL'))
+  .catch((err) => console.error('❌ PostgreSQL connection error:', err));
+
+// Make pool accessible in routes (optional)
+app.locals.db = pool;
+
+// --------------------
+// Middleware
+// --------------------
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// --------------------
+// Static uploads folder
+// --------------------
+const uploadsPath = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsPath)) fs.mkdirSync(uploadsPath, { recursive: true });
+app.use('/uploads', express.static(uploadsPath));
+
+// --------------------
 // Routes
+// --------------------
 app.use('/api/categories', categoryRoutes);
 app.use('/api/subcategories', subcategoryRoutes);
 app.use('/api/places', placeRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Test route
+app.get('/', (req, res) => {
+  res.send('GoLocal backend is running');
+});
+
+// --------------------
+// Start server
+// --------------------
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
