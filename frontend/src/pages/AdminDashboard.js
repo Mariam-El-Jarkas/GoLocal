@@ -1,6 +1,9 @@
+// export default AdminDashboard;
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/admin-dashboard.css";
+// ADD THIS IMPORT
+import { materialIcons } from "../components/materialIcons";
 import {
   FaTachometerAlt,
   FaList,
@@ -51,10 +54,10 @@ const AdminDashboard = () => {
   const [places, setPlaces] = useState([]);
   const [contacts, setContacts] = useState([]);
 
-  // Form states for file uploads
+  // Form states - REMOVE imageFile, add icon
   const [categoryForm, setCategoryForm] = useState({
     name: "",
-    imageFile: null
+    icon: "category" // Default icon
   });
 
   const [subcategoryForm, setSubcategoryForm] = useState({
@@ -135,108 +138,62 @@ const AdminDashboard = () => {
   };
 
   // Close modal
-// Close modal
-// Close modal
-const closeModal = () => {
-  // Clean up any URL objects created for previews
-  if (editForm.image && editForm.image.startsWith('blob:')) {
-    URL.revokeObjectURL(editForm.image);
-  }
-  
-  setShowModal(false);
-  setModalType("");
-  setEditingItem(null);
-  setEditForm({});
-  setCategoryForm({ name: "", imageFile: null });
-  setSubcategoryForm({ name: "", category_id: "" });
-  setPlaceForm({
-    name: "",
-    description: "",
-    address: "",
-    imageFile: null,
-    category_id: "",
-    subcategory_id: ""
-  });
-};
-// Handle edit click
-// Handle edit click
-const handleEdit = (type, item) => {
-  setModalType(`edit-${type}`);
-  setEditingItem(item);
+  const closeModal = () => {
+    setShowModal(false);
+    setModalType("");
+    setEditingItem(null);
+    setEditForm({});
+    setCategoryForm({ name: "", icon: "category" });
+    setSubcategoryForm({ name: "", category_id: "" });
+    setPlaceForm({
+      name: "",
+      description: "",
+      address: "",
+      imageFile: null,
+      category_id: "",
+      subcategory_id: ""
+    });
+  };
 
-  switch (type) {
-    case "category":
-      setEditForm({
-        id: item.id,
-        name: item.name,
-        image: item.image || "", // This will show new image preview
-        originalImage: item.image || "", // Store original separately
-        imageFile: null
-      });
-      break;
-    case "subcategory":
-      setEditForm({
-        id: item.id,
-        name: item.name,
-        category_id: item.category_id || ""
-      });
-      break;
-    case "place":
-      setEditForm({
-        id: item.id,
-        name: item.name,
-        description: item.description || "",
-        address: item.address || "",
-        image: item.image || "", // This will show new image preview
-        originalImage: item.image || "", // Store original separately
-        imageFile: null,
-        category_id: item.category_id || "",
-        subcategory_id: item.subcategory_id || ""
-      });
-      break;
-    default:
-      return;
-  }
+  // Handle edit click
+  const handleEdit = (type, item) => {
+    setModalType(`edit-${type}`);
+    setEditingItem(item);
 
-  setShowModal(true);
-};
-  // // Handle edit click
-  // const handleEdit = (type, item) => {
-  //   setModalType(`edit-${type}`);
-  //   setEditingItem(item);
+    switch (type) {
+      case "category":
+        setEditForm({
+          id: item.id,
+          name: item.name,
+          icon: item.icon || "category"
+        });
+        break;
+      case "subcategory":
+        setEditForm({
+          id: item.id,
+          name: item.name,
+          category_id: item.category_id || ""
+        });
+        break;
+      case "place":
+        setEditForm({
+          id: item.id,
+          name: item.name,
+          description: item.description || "",
+          address: item.address || "",
+          image: item.image || "",
+          originalImage: item.image || "",
+          imageFile: null,
+          category_id: item.category_id || "",
+          subcategory_id: item.subcategory_id || ""
+        });
+        break;
+      default:
+        return;
+    }
 
-  //   switch (type) {
-  //     case "category":
-  //       setEditForm({
-  //         id: item.id,
-  //         name: item.name,
-  //         image: item.image || ""
-  //       });
-  //       break;
-  //     case "subcategory":
-  //       setEditForm({
-  //         id: item.id,
-  //         name: item.name,
-  //         category_id: item.category_id || ""
-  //       });
-  //       break;
-  //     case "place":
-  //       setEditForm({
-  //         id: item.id,
-  //         name: item.name,
-  //         description: item.description || "",
-  //         address: item.address || "",
-  //         image: item.image || "",
-  //         category_id: item.category_id || "",
-  //         subcategory_id: item.subcategory_id || ""
-  //       });
-  //       break;
-  //     default:
-  //       return;
-  //   }
-
-  //   setShowModal(true);
-  // };
+    setShowModal(true);
+  };
 
   // Handle update profile
   const handleUpdateProfile = async () => {
@@ -286,269 +243,137 @@ const handleEdit = (type, item) => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    try {
+      let url = "";
+      let method = "POST";
+      const formData = new FormData();
+      let jsonBody = {};
+      let useFormData = false;
 
-  try {
-    let url = "";
-    let method = "POST";
-    const formData = new FormData();
-    let jsonBody = {};
-    let useFormData = false;
+      if (modalType.startsWith("edit-")) {
+        method = "PUT";
+        const editType = modalType.replace("edit-", "");
 
-    if (modalType.startsWith("edit-")) {
-      method = "PUT";
-      const editType = modalType.replace("edit-", "");
+        switch (editType) {
+          case "category":
+            url = `http://localhost:5000/api/categories/update/${editForm.id}`;
+            jsonBody = {
+              name: editForm.name,
+              icon: editForm.icon
+            };
+            break;
+          case "subcategory":
+            url = `http://localhost:5000/api/subcategories/update/${editForm.id}`;
+            jsonBody = {
+              name: editForm.name,
+              category_id: editForm.category_id
+            };
+            break;
+          case "place":
+            url = `http://localhost:5000/api/places/update/${editForm.id}`;
+            useFormData = true;
+            
+            formData.append('name', editForm.name);
+            formData.append('description', editForm.description || "");
+            formData.append('address', editForm.address || "");
+            formData.append('existingImage', editForm.originalImage || "");
+            formData.append('category_id', editForm.category_id || "");
+            formData.append('subcategory_id', editForm.subcategory_id || "");
+            
+            const selectedCategory = categories.find(cat => cat.id == editForm.category_id);
+            if (selectedCategory) {
+              formData.append('category_name', selectedCategory.name);
+            } else if (editForm.category_id) {
+              formData.append('category_name', `category-${editForm.category_id}`);
+            }
+            
+            if (editForm.imageFile) {
+              formData.append('image', editForm.imageFile);
+            }
+            break;
+          default:
+            throw new Error(`Unknown edit type: ${editType}`);
+        }
+      } else {
+        switch (modalType) {
+          case "category":
+            url = "http://localhost:5000/api/categories/add";
+            jsonBody = categoryForm;
+            break;
+          case "subcategory":
+            url = "http://localhost:5000/api/subcategories/add";
+            jsonBody = subcategoryForm;
+            break;
+          case "place":
+            url = "http://localhost:5000/api/places/add";
+            useFormData = true;
+            
+            formData.append('name', placeForm.name);
+            formData.append('description', placeForm.description || "");
+            formData.append('address', placeForm.address || "");
+            formData.append('category_id', placeForm.category_id || "");
+            formData.append('subcategory_id', placeForm.subcategory_id || "");
+            
+            const selectedCategory = categories.find(cat => cat.id == placeForm.category_id);
+            if (selectedCategory) {
+              formData.append('category_name', selectedCategory.name);
+            } else if (placeForm.category_id) {
+              formData.append('category_name', `category-${placeForm.category_id}`);
+            }
 
-      switch (editType) {
-        case "category":
-          url = `http://localhost:5000/api/categories/update/${editForm.id}`;
-          useFormData = true;
-          
-          formData.append('name', editForm.name);
-          formData.append('existingImage', editForm.originalImage || "");
-          
-          if (editForm.imageFile) {
-            formData.append('image', editForm.imageFile);
-          }
-          break;
-        case "subcategory":
-          url = `http://localhost:5000/api/subcategories/update/${editForm.id}`;
-          jsonBody = {
-            name: editForm.name,
-            category_id: editForm.category_id
-          };
-          break;
-        case "place":
-          url = `http://localhost:5000/api/places/update/${editForm.id}`;
-          useFormData = true;
-          
-          formData.append('name', editForm.name);
-          formData.append('description', editForm.description || "");
-          formData.append('address', editForm.address || "");
-          formData.append('existingImage', editForm.originalImage || "");
-          formData.append('category_id', editForm.category_id || "");
-          formData.append('subcategory_id', editForm.subcategory_id || "");
-          
-          const selectedCategory = categories.find(cat => cat.id == editForm.category_id);
-          if (selectedCategory) {
-            formData.append('category_name', selectedCategory.name);
-          } else if (editForm.category_id) {
-            formData.append('category_name', `category-${editForm.category_id}`);
-          }
-          
-          if (editForm.imageFile) {
-            formData.append('image', editForm.imageFile);
-          }
-          break;
-        default:
-          throw new Error(`Unknown edit type: ${editType}`);
-      }
-    } else {
-      switch (modalType) {
-        case "category":
-          url = "http://localhost:5000/api/categories/add";
-          useFormData = true;
-          formData.append('name', categoryForm.name);
-          if (categoryForm.imageFile) {
-            formData.append('image', categoryForm.imageFile);
-          }
-          break;
-        case "subcategory":
-          url = "http://localhost:5000/api/subcategories/add";
-          jsonBody = subcategoryForm;
-          break;
-        case "place":
-          url = "http://localhost:5000/api/places/add";
-          useFormData = true;
-          
-          formData.append('name', placeForm.name);
-          formData.append('description', placeForm.description || "");
-          formData.append('address', placeForm.address || "");
-          formData.append('category_id', placeForm.category_id || "");
-          formData.append('subcategory_id', placeForm.subcategory_id || "");
-          
-          const selectedCategory = categories.find(cat => cat.id == placeForm.category_id);
-          if (selectedCategory) {
-            formData.append('category_name', selectedCategory.name);
-          } else if (placeForm.category_id) {
-            formData.append('category_name', `category-${placeForm.category_id}`);
-          }
-
-          if (placeForm.imageFile) {
-            formData.append('image', placeForm.imageFile);
-          }
-          break;
-        default:
-          throw new Error(`Unknown modal type: ${modalType}`);
-      }
-    }
-
-    let res;
-    if (useFormData) {
-      res = await fetch(url, {
-        method: method,
-        body: formData
-      });
-    } else {
-      res = await fetch(url, {
-        method: method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(jsonBody)
-      });
-    }
-
-    const data = await res.json();
-
-    if (res.ok) {
-      alert(`✅ ${data.message || "Operation successful!"}`);
-      closeModal();
-
-      if (modalType === "subcategory" || modalType === "edit-subcategory") {
-        try {
-          const subRes = await fetch("http://localhost:5000/api/subcategories");
-          if (subRes.ok) {
-            const subData = await subRes.json();
-            setSubcategories(subData || []);
-          }
-        } catch (subError) {
-          console.log("Could not refresh subcategories:", subError);
+            if (placeForm.imageFile) {
+              formData.append('image', placeForm.imageFile);
+            }
+            break;
+          default:
+            throw new Error(`Unknown modal type: ${modalType}`);
         }
       }
 
-      fetchAllData();
-    } else {
-      alert(`❌ ${data.message || "Operation failed"}`);
+      let res;
+      if (useFormData) {
+        res = await fetch(url, {
+          method: method,
+          body: formData
+        });
+      } else {
+        res = await fetch(url, {
+          method: method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(jsonBody)
+        });
+      }
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(`✅ ${data.message || "Operation successful!"}`);
+        closeModal();
+
+        if (modalType === "subcategory" || modalType === "edit-subcategory") {
+          try {
+            const subRes = await fetch("http://localhost:5000/api/subcategories");
+            if (subRes.ok) {
+              const subData = await subRes.json();
+              setSubcategories(subData || []);
+            }
+          } catch (subError) {
+            console.log("Could not refresh subcategories:", subError);
+          }
+        }
+
+        fetchAllData();
+      } else {
+        alert(`❌ ${data.message || "Operation failed"}`);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("❌ Error saving data");
     }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("❌ Error saving data");
-  }
-};
-  // Handle form submission with file uploads
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     let url = "";
-  //     let method = "POST";
-  //     const formData = new FormData();
-  //     let jsonBody = {};
-  //     let useFormData = false;
-
-  //     if (modalType.startsWith("edit-")) {
-  //       method = "PUT";
-  //       const editType = modalType.replace("edit-", "");
-
-  //       switch(editType) {
-  //         case "category":
-  //           url = `http://localhost:5000/api/categories/update/${editForm.id}`;
-  //           jsonBody = {
-  //             name: editForm.name,
-  //             image: editForm.image || null,
-  //             existingImage: editForm.image || null
-  //           };
-  //           break;
-  //         case "subcategory":
-  //           url = `http://localhost:5000/api/subcategories/update/${editForm.id}`;
-  //           jsonBody = {
-  //             name: editForm.name,
-  //             category_id: editForm.category_id
-  //           };
-  //           break;
-  //         case "place":
-  //           url = `http://localhost:5000/api/places/update/${editForm.id}`;
-  //           jsonBody = {
-  //             name: editForm.name,
-  //             description: editForm.description || null,
-  //             address: editForm.address || null,
-  //             image: editForm.image || null,
-  //             existingImage: editForm.image || null,
-  //             category_id: editForm.category_id,
-  //             subcategory_id: editForm.subcategory_id || null
-  //           };
-  //           break;
-  //         default:
-  //           throw new Error(`Unknown edit type: ${editType}`);
-  //       }
-  //     } else {
-  //       switch(modalType) {
-  //         case "category":
-  //           url = "http://localhost:5000/api/categories/add";
-  //           useFormData = true;
-  //           formData.append('name', categoryForm.name);
-  //           if (categoryForm.imageFile) {
-  //             formData.append('image', categoryForm.imageFile);
-  //           }
-  //           break;
-  //         case "subcategory":
-  //           url = "http://localhost:5000/api/subcategories/add";
-  //           jsonBody = subcategoryForm;
-  //           break;
-  //         case "place":
-  //           url = "http://localhost:5000/api/places/add";
-  //           useFormData = true;
-  //           formData.append('name', placeForm.name);
-  //           formData.append('description', placeForm.description || "");
-  //           formData.append('address', placeForm.address || "");
-  //           formData.append('category_id', placeForm.category_id || "");
-  //           formData.append('subcategory_id', placeForm.subcategory_id || "");
-  //           if (placeForm.imageFile) {
-  //             formData.append('image', placeForm.imageFile);
-  //           }
-  //           // For places, we need to send category name for file naming
-  //           const selectedCategory = categories.find(cat => cat.id == placeForm.category_id);
-  //           if (selectedCategory && placeForm.imageFile) {
-  //             formData.append('category_name', selectedCategory.name);
-  //           }
-  //           break;
-  //         default:
-  //           throw new Error(`Unknown modal type: ${modalType}`);
-  //       }
-  //     }
-
-  //     let res;
-  //     if (useFormData) {
-  //       res = await fetch(url, {
-  //         method: method,
-  //         body: formData
-  //       });
-  //     } else {
-  //       res = await fetch(url, {
-  //         method: method,
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify(jsonBody)
-  //       });
-  //     }
-
-  //     const data = await res.json();
-
-  //     if (res.ok) {
-  //       alert(`✅ ${data.message || "Operation successful!"}`);
-  //       closeModal();
-
-  //       if (modalType === "subcategory" || modalType === "edit-subcategory") {
-  //         try {
-  //           const subRes = await fetch("http://localhost:5000/api/subcategories");
-  //           if (subRes.ok) {
-  //             const subData = await subRes.json();
-  //             setSubcategories(subData || []);
-  //           }
-  //         } catch (subError) {
-  //           console.log("Could not refresh subcategories:", subError);
-  //         }
-  //       }
-
-  //       fetchAllData();
-  //     } else {
-  //       alert(`❌ ${data.message || "Operation failed"}`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     alert("❌ Error saving data");
-  //   }
-  // };
+  };
 
   // Handle delete operations
   const handleDelete = async (type, id) => {
@@ -592,17 +417,6 @@ const handleSubmit = async (e) => {
   const handleViewPlace = (placeId) => {
     window.open(`/place/${placeId}`, '_blank');
   };
-
-  // Current time
-  // const [currentTime, setCurrentTime] = useState(new Date());
-
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCurrentTime(new Date());
-  //   }, 1000);
-
-  //   return () => clearInterval(timer);
-  // }, []);
 
   // Render loading state
   if (isLoading) {
@@ -688,8 +502,6 @@ const handleSubmit = async (e) => {
               {activeSection === "settings" && "Configure your system settings"}
             </p>
           </div>
-
-        
         </header>
 
         {/* Content Area */}
@@ -806,8 +618,8 @@ const handleSubmit = async (e) => {
                   <thead>
                     <tr>
                       <th>ID</th>
+                      <th>Icon</th>
                       <th>Name</th>
-                      <th>Image</th>
                       <th>Places</th>
                       <th>Actions</th>
                     </tr>
@@ -817,20 +629,11 @@ const handleSubmit = async (e) => {
                       <tr key={category.id}>
                         <td>#{category.id}</td>
                         <td>
-                          <div className="table-item">
-                            {category.image && (
-                              <img src={category.image} alt={category.name} className="table-img" />
-                            )}
-                            <span>{category.name}</span>
-                          </div>
+                          <span className="material-icons" style={{ fontSize: "2rem", color: "#2e7d32" }}>
+                            {category.icon || "category"}
+                          </span>
                         </td>
-                        <td>
-                          {category.image ? (
-                            <a href={category.image} target="_blank" rel="noopener noreferrer" className="image-link">View</a>
-                          ) : (
-                            <span className="no-image">No image</span>
-                          )}
-                        </td>
+                        <td>{category.name}</td>
                         <td>
                           <span className="badge">
                             {places.filter(p => p.category_id === category.id).length}
@@ -957,9 +760,9 @@ const handleSubmit = async (e) => {
                         <td>#{place.id}</td>
                         <td>
                           <div className="table-item">
-                            {place.image && (
-                              <img src={place.image} alt={place.name} className="table-img" />
-                            )}
+                           {place.image && (
+  <img src={`http://localhost:5000${place.image}`} alt={place.name} className="table-img" />
+)}
                             <span>{place.name}</span>
                           </div>
                         </td>
@@ -1203,7 +1006,7 @@ const handleSubmit = async (e) => {
 
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
-                {/* Add Category Form */}
+                {/* Add Category Form - MATERIAL ICONS */}
                 {modalType === "category" && (
                   <>
                     <div className="form-group">
@@ -1217,101 +1020,170 @@ const handleSubmit = async (e) => {
                       />
                     </div>
                     <div className="form-group">
-                      <label>Category Image</label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files[0];
-                          if (file) {
-                            setCategoryForm({
-                              ...categoryForm,
-                              imageFile: file
-                            });
-                          }
-                        }}
-                      />
-                      {categoryForm.imageFile && (
-                        <div style={{ marginTop: '10px', color: '#4CAF50' }}>
-                          Selected: {categoryForm.imageFile.name}
+                      <label>Select Icon *</label>
+                      <div style={{ 
+                        display: "grid", 
+                        gridTemplateColumns: "repeat(6, 1fr)", 
+                        gap: "8px",
+                        maxHeight: "250px",
+                        overflowY: "auto",
+                        padding: "15px",
+                        border: "1px solid #ddd",
+                        borderRadius: "8px",
+                        backgroundColor: "#f9f9f9"
+                      }}>
+                        {materialIcons.map((iconName, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            onClick={() => setCategoryForm({ ...categoryForm, icon: iconName })}
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              padding: "12px 5px",
+                              border: categoryForm.icon === iconName ? "2px solid #2e7d32" : "1px solid #ccc",
+                              background: categoryForm.icon === iconName ? "#e8f5e9" : "white",
+                              borderRadius: "6px",
+                              cursor: "pointer",
+                              transition: "all 0.2s"
+                            }}
+                            title={iconName.replace(/_/g, ' ')}
+                          >
+                            <span className="material-icons" style={{ 
+                              fontSize: "24px", 
+                              color: "#2e7d32",
+                              marginBottom: "5px"
+                            }}>
+                              {iconName}
+                            </span>
+                            <span style={{
+                              fontSize: "10px",
+                              color: "#666",
+                              textAlign: "center",
+                              wordBreak: "break-word",
+                              maxWidth: "60px"
+                            }}>
+                              {iconName.length > 10 ? iconName.substring(0, 8) + '..' : iconName}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                      <div style={{ 
+                        marginTop: "15px", 
+                        padding: "10px", 
+                        backgroundColor: "#f0f7f0",
+                        borderRadius: "6px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px"
+                      }}>
+                        <span className="material-icons" style={{ fontSize: "28px", color: "#2e7d32" }}>
+                          {categoryForm.icon || 'category'}
+                        </span>
+                        <div>
+                          <div style={{ fontWeight: "bold", color: "#2e7d32" }}>
+                            Selected Icon: {categoryForm.icon || 'category'}
+                          </div>
+                          <div style={{ fontSize: "12px", color: "#666" }}>
+                            {categoryForm.icon ? categoryForm.icon.replace(/_/g, ' ') : 'No icon selected'}
+                          </div>
                         </div>
-                      )}
+                      </div>
                     </div>
                   </>
                 )}
 
-                {/* Edit Category Form */}
-{/* Edit Category Form */}
-{modalType === "edit-category" && (
-  <>
-    <div className="form-group">
-      <label>Category Name *</label>
-      <input
-        type="text"
-        value={editForm.name}
-        onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-        placeholder="Enter category name"
-        required
-      />
-    </div>
-    
-    <div className="form-group">
-      <label>Current Image</label>
-      {editForm.originalImage ? (
-        <div style={{ marginBottom: '15px' }}>
-          <img
-            src={editForm.originalImage}
-            alt="Current"
-            style={{ maxWidth: '100px', maxHeight: '100px', border: '1px solid #ddd' }}
-          />
-          <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
-            Current image
-          </p>
-        </div>
-      ) : (
-        <p style={{ color: '#999' }}>No current image</p>
-      )}
-    </div>
-    
-    <div className="form-group">
-      <label>Update Image (optional)</label>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const previewUrl = URL.createObjectURL(file);
-            setEditForm({
-              ...editForm,
-              imageFile: file,
-              image: previewUrl // This shows new image preview
-            });
-          }
-        }}
-      />
-      
-      {editForm.imageFile && (
-        <div style={{ marginTop: '15px', padding: '10px', backgroundColor: '#f8f9fa', borderRadius: '5px' }}>
-          <div style={{ color: '#4CAF50', fontWeight: 'bold', marginBottom: '8px' }}>
-            📸 New Image Preview:
-          </div>
-          <img
-            src={editForm.image}
-            alt="New Preview"
-            style={{ maxWidth: '100px', maxHeight: '100px', border: '2px solid #4CAF50' }}
-          />
-          <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
-            {editForm.imageFile.name}
-          </p>
-          <p style={{ fontSize: '12px', color: '#ff9800', marginTop: '5px' }}>
-            ⚠️ This will replace the current image
-          </p>
-        </div>
-      )}
-    </div>
-  </>
-)}
+                {/* Edit Category Form - MATERIAL ICONS */}
+                {modalType === "edit-category" && (
+                  <>
+                    <div className="form-group">
+                      <label>Category Name *</label>
+                      <input
+                        type="text"
+                        value={editForm.name}
+                        onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                        placeholder="Enter category name"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Select Icon *</label>
+                      <div style={{ 
+                        display: "grid", 
+                        gridTemplateColumns: "repeat(6, 1fr)", 
+                        gap: "8px",
+                        maxHeight: "250px",
+                        overflowY: "auto",
+                        padding: "15px",
+                        border: "1px solid #ddd",
+                        borderRadius: "8px",
+                        backgroundColor: "#f9f9f9"
+                      }}>
+                        {materialIcons.map((iconName, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            onClick={() => setEditForm({ ...editForm, icon: iconName })}
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              padding: "12px 5px",
+                              border: editForm.icon === iconName ? "2px solid #2e7d32" : "1px solid #ccc",
+                              background: editForm.icon === iconName ? "#e8f5e9" : "white",
+                              borderRadius: "6px",
+                              cursor: "pointer",
+                              transition: "all 0.2s"
+                            }}
+                            title={iconName.replace(/_/g, ' ')}
+                          >
+                            <span className="material-icons" style={{ 
+                              fontSize: "24px", 
+                              color: "#2e7d32",
+                              marginBottom: "5px"
+                            }}>
+                              {iconName}
+                            </span>
+                            <span style={{
+                              fontSize: "10px",
+                              color: "#666",
+                              textAlign: "center",
+                              wordBreak: "break-word",
+                              maxWidth: "60px"
+                            }}>
+                              {iconName.length > 10 ? iconName.substring(0, 8) + '..' : iconName}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                      <div style={{ 
+                        marginTop: "15px", 
+                        padding: "10px", 
+                        backgroundColor: "#f0f7f0",
+                        borderRadius: "6px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px"
+                      }}>
+                        <span className="material-icons" style={{ fontSize: "28px", color: "#2e7d32" }}>
+                          {editForm.icon || 'category'}
+                        </span>
+                        <div>
+                          <div style={{ fontWeight: "bold", color: "#2e7d32" }}>
+                            Selected Icon: {editForm.icon || 'category'}
+                          </div>
+                          <div style={{ fontSize: "12px", color: "#666" }}>
+                            {editForm.icon ? editForm.icon.replace(/_/g, ' ') : 'No icon selected'}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
                 {/* Add Subcategory Form */}
                 {modalType === "subcategory" && (
                   <>
@@ -1453,123 +1325,122 @@ const handleSubmit = async (e) => {
                 )}
 
                 {/* Edit Place Form */}
-                {/* Edit Place Form */}
-{modalType === "edit-place" && (
-  <>
-    <div className="form-group">
-      <label>Place Name *</label>
-      <input
-        type="text"
-        value={editForm.name}
-        onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-        placeholder="Enter place name"
-        required
-      />
-    </div>
-    <div className="form-group">
-      <label>Description</label>
-      <textarea
-        value={editForm.description || ""}
-        onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
-        placeholder="Enter description"
-        rows="3"
-      />
-    </div>
-    <div className="form-group">
-      <label>Address</label>
-      <input
-        type="text"
-        value={editForm.address || ""}
-        onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
-        placeholder="Enter address"
-      />
-    </div>
-    
-    <div className="form-group">
-      <label>Current Image</label>
-      {editForm.originalImage ? (
-        <div style={{ marginBottom: '15px' }}>
-          <img
-            src={editForm.originalImage}
-            alt="Current"
-            style={{ maxWidth: '100px', maxHeight: '100px', border: '1px solid #ddd' }}
-          />
-          <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
-            Current image
-          </p>
-        </div>
-      ) : (
-        <p style={{ color: '#999' }}>No current image</p>
-      )}
-    </div>
-    
-    <div className="form-group">
-      <label>Update Image (optional)</label>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const previewUrl = URL.createObjectURL(file);
-            setEditForm({
-              ...editForm,
-              imageFile: file,
-              image: previewUrl // This shows new image preview
-            });
-          }
-        }}
-      />
-      
-      {editForm.imageFile && (
-        <div style={{ marginTop: '15px', padding: '10px', backgroundColor: '#f8f9fa', borderRadius: '5px' }}>
-          <div style={{ color: '#4CAF50', fontWeight: 'bold', marginBottom: '8px' }}>
-            📸 New Image Preview:
-          </div>
-          <img
-            src={editForm.image}
-            alt="New Preview"
-            style={{ maxWidth: '100px', maxHeight: '100px', border: '2px solid #4CAF50' }}
-          />
-          <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
-            {editForm.imageFile.name}
-          </p>
-          <p style={{ fontSize: '12px', color: '#ff9800', marginTop: '5px' }}>
-            ⚠️ This will replace the current image
-          </p>
-        </div>
-      )}
-    </div>
-    
-    <div className="form-row">
-      <div className="form-group">
-        <label>Category *</label>
-        <select
-          value={editForm.category_id}
-          onChange={(e) => setEditForm({ ...editForm, category_id: e.target.value })}
-          required
-        >
-          <option value="">Select category</option>
-          {categories.map(cat => (
-            <option key={cat.id} value={cat.id}>{cat.name}</option>
-          ))}
-        </select>
-      </div>
-      <div className="form-group">
-        <label>Subcategory</label>
-        <select
-          value={editForm.subcategory_id || ""}
-          onChange={(e) => setEditForm({ ...editForm, subcategory_id: e.target.value })}
-        >
-          <option value="">Select subcategory (optional)</option>
-          {subcategories.map(sub => (
-            <option key={sub.id} value={sub.id}>{sub.name}</option>
-          ))}
-        </select>
-      </div>
-    </div>
-  </>
-)}
+                {modalType === "edit-place" && (
+                  <>
+                    <div className="form-group">
+                      <label>Place Name *</label>
+                      <input
+                        type="text"
+                        value={editForm.name}
+                        onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                        placeholder="Enter place name"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Description</label>
+                      <textarea
+                        value={editForm.description || ""}
+                        onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                        placeholder="Enter description"
+                        rows="3"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Address</label>
+                      <input
+                        type="text"
+                        value={editForm.address || ""}
+                        onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
+                        placeholder="Enter address"
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <label>Current Image</label>
+                      {editForm.originalImage ? (
+                        <div style={{ marginBottom: '15px' }}>
+                          <img
+                            src={editForm.originalImage}
+                            alt="Current"
+                            style={{ maxWidth: '100px', maxHeight: '100px', border: '1px solid #ddd' }}
+                          />
+                          <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+                            Current image
+                          </p>
+                        </div>
+                      ) : (
+                        <p style={{ color: '#999' }}>No current image</p>
+                      )}
+                    </div>
+                    
+                    <div className="form-group">
+                      <label>Update Image (optional)</label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            const previewUrl = URL.createObjectURL(file);
+                            setEditForm({
+                              ...editForm,
+                              imageFile: file,
+                              image: previewUrl
+                            });
+                          }
+                        }}
+                      />
+                      
+                      {editForm.imageFile && (
+                        <div style={{ marginTop: '15px', padding: '10px', backgroundColor: '#f8f9fa', borderRadius: '5px' }}>
+                          <div style={{ color: '#4CAF50', fontWeight: 'bold', marginBottom: '8px' }}>
+                            📸 New Image Preview:
+                          </div>
+                          <img
+                            src={editForm.image}
+                            alt="New Preview"
+                            style={{ maxWidth: '100px', maxHeight: '100px', border: '2px solid #4CAF50' }}
+                          />
+                          <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+                            {editForm.imageFile.name}
+                          </p>
+                          <p style={{ fontSize: '12px', color: '#ff9800', marginTop: '5px' }}>
+                            ⚠️ This will replace the current image
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Category *</label>
+                        <select
+                          value={editForm.category_id}
+                          onChange={(e) => setEditForm({ ...editForm, category_id: e.target.value })}
+                          required
+                        >
+                          <option value="">Select category</option>
+                          {categories.map(cat => (
+                            <option key={cat.id} value={cat.id}>{cat.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="form-group">
+                        <label>Subcategory</label>
+                        <select
+                          value={editForm.subcategory_id || ""}
+                          onChange={(e) => setEditForm({ ...editForm, subcategory_id: e.target.value })}
+                        >
+                          <option value="">Select subcategory (optional)</option>
+                          {subcategories.map(sub => (
+                            <option key={sub.id} value={sub.id}>{sub.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </>
+                )}
 
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" onClick={closeModal}>

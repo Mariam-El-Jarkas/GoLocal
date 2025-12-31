@@ -1,22 +1,22 @@
-
 const express = require('express');
 const router = express.Router();
 const {
   getSubcategories,
-  getAllSubcategories,  // Make sure this exists
+  getSubcategoryDetails,  // ADD THIS IMPORT
+  getSubcategoryInfo,     // ADD THIS IMPORT
+  getAllSubcategories,
   addSubcategory,
   deleteSubcategory,
-  updateSubcategory  // <-- THIS MUST BE HERE!
+  updateSubcategory
 } = require('../controllers/subcategoriesController');
 
-// Get subcategories by category ID
+// Routes
 router.get('/:categoryId', getSubcategories);
-
-// Get ALL subcategories (NEW ROUTE)
+router.get('/:id/details', getSubcategoryDetails);     // ADD THIS ROUTE
+router.get('/:id/info', getSubcategoryInfo);           // ADD THIS ROUTE (fallback)
 router.get('/', getAllSubcategories);
-
 router.post('/add', addSubcategory);
 router.delete('/delete/:id', deleteSubcategory);
-router.put('/update/:id', updateSubcategory); // <-- Needs the import above
+router.put('/update/:id', updateSubcategory);
 
 module.exports = router;

@@ -11,7 +11,7 @@ function PlaceCard({ place }) {
     <div className="place-card">
 
       {/* Image of the place */}
-      <img src={place.image} alt={place.name} className="place-img" />
+<img src={`http://localhost:5000${place.image}`} alt={place.name} className="place-img" />
 
       {/* Content section: name, description, and link */}
       <div className="place-content">

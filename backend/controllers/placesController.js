@@ -9,6 +9,42 @@ const getPlaces = (req, res) => {
   });
 };
 
+// GET PLACE BY ID
+const getPlaceById = (req, res) => {
+  const { id } = req.params;
+  
+  db.query('SELECT * FROM places WHERE id = ?', [id], (err, result) => {
+    if (err) {
+      console.error('❌ Database error:', err);
+      return res.status(500).json({ message: 'Database error' });
+    }
+    
+    if (result.length === 0) {
+      return res.status(404).json({ message: 'Place not found' });
+    }
+    
+    res.json(result[0]);
+  });
+};
+
+// GET SUB CATEGORY DETAILS
+const getSubcategoryDetails = (req, res) => {
+  const { id } = req.params;
+  
+  db.query('SELECT * FROM subcategories WHERE id = ?', [id], (err, result) => {
+    if (err) {
+      console.error('❌ Database error:', err);
+      return res.status(500).json({ message: 'Database error' });
+    }
+    
+    if (result.length === 0) {
+      return res.status(404).json({ message: 'Subcategory not found' });
+    }
+    
+    res.json(result[0]);
+  });
+};
+
 const addPlace = (req, res) => {
   console.log('🔄 addPlace called');
   console.log('File:', req.file);
@@ -234,4 +270,11 @@ const deletePlace = (req, res) => {
   });
 };
 
-module.exports = { getPlaces, addPlace, deletePlace, updatePlace };
+module.exports = { 
+  getPlaces, 
+  getPlaceById,
+  getSubcategoryDetails,
+  addPlace, 
+  deletePlace, 
+  updatePlace 
+};

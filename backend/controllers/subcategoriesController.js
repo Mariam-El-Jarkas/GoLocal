@@ -1,4 +1,3 @@
-
 const db = require('../config/db');
 
 // Get subcategories by category ID
@@ -14,6 +13,51 @@ const getSubcategories = (req, res) => {
     }
   );
 };
+
+// NEW: Get subcategory details with category name
+const getSubcategoryDetails = (req, res) => {
+  const { id } = req.params;
+  
+  db.query(
+    `SELECT s.*, c.name as category_name 
+     FROM subcategories s 
+     LEFT JOIN categories c ON s.category_id = c.id 
+     WHERE s.id = ?`,
+    [id],
+    (err, result) => {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).json({ message: 'Database error' });
+      }
+      
+      if (result.length === 0) {
+        return res.status(404).json({ message: 'Subcategory not found' });
+      }
+      
+      res.json(result[0]);
+    }
+  );
+};
+
+// Alternative simple function if join doesn't work
+const getSubcategoryInfo = (req, res) => {
+  const { id } = req.params;
+  
+  db.query(
+    'SELECT * FROM subcategories WHERE id = ?',
+    [id],
+    (err, result) => {
+      if (err) return res.status(500).json({ message: 'Database error' });
+      
+      if (result.length === 0) {
+        return res.status(404).json({ message: 'Subcategory not found' });
+      }
+      
+      res.json(result[0]);
+    }
+  );
+};
+
 const addSubcategory = (req, res) => {
   const { name, category_id } = req.body;
   if (!name || !category_id)
@@ -41,7 +85,7 @@ const deleteSubcategory = (req, res) => {
   });
 };
 
-// Add this NEW function to get ALL subcategories
+// Get ALL subcategories
 const getAllSubcategories = (req, res) => {
   db.query('SELECT * FROM subcategories', (err, result) => {
     if (err) {
@@ -51,7 +95,8 @@ const getAllSubcategories = (req, res) => {
     res.json(result);
   });
 };
-// Add this function to subcategoriesController.js
+
+// Update subcategory
 const updateSubcategory = (req, res) => {
   const { id } = req.params;
   const { name, category_id } = req.body;
@@ -71,12 +116,13 @@ const updateSubcategory = (req, res) => {
   );
 };
 
-// Add to module.exports:
+// Export all functions
 module.exports = { 
   getSubcategories, 
+  getSubcategoryDetails,  // ADDED
+  getSubcategoryInfo,     // ADDED (fallback)
   getAllSubcategories,
   addSubcategory, 
   deleteSubcategory,
   updateSubcategory 
 };
-
