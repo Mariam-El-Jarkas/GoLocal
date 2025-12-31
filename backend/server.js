@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+console.log('DB URL:', process.env.DATABASE_URL);
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
