@@ -9,10 +9,12 @@ const PlaceDetails = () => {
   const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     setLoading(true);
     
-    fetch(`http://localhost:5000/api/places/${id}`)
+    fetch(`${API_URL}/api/places/${id}`)
       .then(res => res.json())
       .then(placeData => {
         setPlace(placeData);
@@ -121,7 +123,7 @@ const PlaceDetails = () => {
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
               }}>
                 <img 
-                  src={`http://localhost:5000${place.image}`} 
+                  src={`${API_URL}${place.image}`} 
                   alt={place.name}
                   style={{ 
                     width: "100%", 

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import CategoryCard from "../components/CategoryCard";
 import "../styles/categories.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch(`${API_URL}/api/categories`)
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.error(err));

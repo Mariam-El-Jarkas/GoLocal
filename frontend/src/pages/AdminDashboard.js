@@ -25,6 +25,8 @@ import {
   FaSync
 } from "react-icons/fa";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("dashboard");
@@ -89,23 +91,23 @@ const AdminDashboard = () => {
     setIsLoading(true);
     try {
       // Fetch categories
-      const catRes = await fetch("http://localhost:5000/api/categories");
+      const catRes = await fetch(`${API_URL}/api/categories`);
       const catData = await catRes.json();
       setCategories(catData || []);
 
       // Fetch places
-      const placesRes = await fetch("http://localhost:5000/api/places");
+      const placesRes = await fetch(`${API_URL}/api/places`);
       const placesData = await placesRes.json();
       setPlaces(placesData || []);
 
       // Fetch contacts
-      const contactsRes = await fetch("http://localhost:5000/api/contacts");
+      const contactsRes = await fetch(`${API_URL}/api/contacts`);
       const contactsData = await contactsRes.json();
       setContacts(contactsData || []);
 
       // Fetch subcategories
       try {
-        const subRes = await fetch("http://localhost:5000/api/subcategories");
+        const subRes = await fetch(`${API_URL}/api/subcategories`);
         if (subRes.ok) {
           const subData = await subRes.json();
           setSubcategories(subData || []);
@@ -213,7 +215,7 @@ const AdminDashboard = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/update-profile", {
+      const res = await fetch(`${API_URL}/api/admin/update-profile`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -258,22 +260,22 @@ const AdminDashboard = () => {
         const editType = modalType.replace("edit-", "");
 
         switch (editType) {
-          case "category":
-            url = `http://localhost:5000/api/categories/update/${editForm.id}`;
+            case "category":
+            url = `${API_URL}/api/categories/update/${editForm.id}`;
             jsonBody = {
               name: editForm.name,
               icon: editForm.icon
             };
             break;
           case "subcategory":
-            url = `http://localhost:5000/api/subcategories/update/${editForm.id}`;
+            url = `${API_URL}/api/subcategories/update/${editForm.id}`;
             jsonBody = {
               name: editForm.name,
               category_id: editForm.category_id
             };
             break;
           case "place":
-            url = `http://localhost:5000/api/places/update/${editForm.id}`;
+            url = `${API_URL}/api/places/update/${editForm.id}`;
             useFormData = true;
             
             formData.append('name', editForm.name);
@@ -299,16 +301,16 @@ const AdminDashboard = () => {
         }
       } else {
         switch (modalType) {
-          case "category":
-            url = "http://localhost:5000/api/categories/add";
+            case "category":
+            url = `${API_URL}/api/categories/add`;
             jsonBody = categoryForm;
             break;
           case "subcategory":
-            url = "http://localhost:5000/api/subcategories/add";
+            url = `${API_URL}/api/subcategories/add`;
             jsonBody = subcategoryForm;
             break;
           case "place":
-            url = "http://localhost:5000/api/places/add";
+            url = `${API_URL}/api/places/add`;
             useFormData = true;
             
             formData.append('name', placeForm.name);
@@ -354,8 +356,8 @@ const AdminDashboard = () => {
         closeModal();
 
         if (modalType === "subcategory" || modalType === "edit-subcategory") {
-          try {
-            const subRes = await fetch("http://localhost:5000/api/subcategories");
+            try {
+            const subRes = await fetch(`${API_URL}/api/subcategories`);
             if (subRes.ok) {
               const subData = await subRes.json();
               setSubcategories(subData || []);
@@ -383,16 +385,16 @@ const AdminDashboard = () => {
       let url = "";
       switch (type) {
         case "category":
-          url = `http://localhost:5000/api/categories/delete/${id}`;
+          url = `${API_URL}/api/categories/delete/${id}`;
           break;
         case "subcategory":
-          url = `http://localhost:5000/api/subcategories/delete/${id}`;
+          url = `${API_URL}/api/subcategories/delete/${id}`;
           break;
         case "place":
-          url = `http://localhost:5000/api/places/delete/${id}`;
+          url = `${API_URL}/api/places/delete/${id}`;
           break;
         case "contact":
-          url = `http://localhost:5000/api/contacts/delete/${id}`;
+          url = `${API_URL}/api/contacts/delete/${id}`;
           break;
         default:
           return;
@@ -761,7 +763,7 @@ const AdminDashboard = () => {
                         <td>
                           <div className="table-item">
                            {place.image && (
-  <img src={`http://localhost:5000${place.image}`} alt={place.name} className="table-img" />
+  <img src={`${API_URL}${place.image}`} alt={place.name} className="table-img" />
 )}
                             <span>{place.name}</span>
                           </div>

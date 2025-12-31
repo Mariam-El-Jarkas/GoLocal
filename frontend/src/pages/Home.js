@@ -3,13 +3,15 @@ import PlaceCard from "../components/PlaceCard";
 import "../styles/home.css";
 import saidaImage from '../assets/images/saida.png';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Home = () => {
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true); // ADD THIS
 
   useEffect(() => {
     setLoading(true); // ADD THIS
-    fetch("http://localhost:5000/api/places")
+    fetch(`${API_URL}/api/places`)
       .then((res) => res.json())
       .then((data) => {
         const newestPlaces = data

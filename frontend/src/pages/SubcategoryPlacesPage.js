@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../styles/subcategoryPlaces.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
 const SubcategoryPlacesPage = () => {
   const { id } = useParams();
   const [subcategory, setSubcategory] = useState(null);
@@ -12,13 +13,13 @@ const SubcategoryPlacesPage = () => {
     setLoading(true);
     
     // Fetch subcategory details
-    fetch(`http://localhost:5000/api/subcategories/${id}/details`)
+    fetch(`${API_URL}/api/subcategories/${id}/details`)
       .then(res => res.json())
       .then(data => {
         setSubcategory(data);
         
         // Fetch all places and filter by subcategory_id
-        return fetch("http://localhost:5000/api/places");
+        return fetch(`${API_URL}/api/places`);
       })
       .then(res => res.json())
       .then(allPlaces => {
@@ -57,7 +58,7 @@ const SubcategoryPlacesPage = () => {
               <div className="place-card">
                 {place.image && (
                   <img 
-                    src={`http://localhost:5000${place.image}`} 
+                    src={`${API_URL}${place.image}`} 
                     alt={place.name}
                     className="place-image"
                   />

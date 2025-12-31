@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../styles/contact.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +17,7 @@ const Contact = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/contacts/add", {
+      const res = await fetch(`${API_URL}/api/contacts/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, message }),

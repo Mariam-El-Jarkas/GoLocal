@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "../styles/admin-login.css";
 import Navbar from "../components/Navbar";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +23,7 @@ const AdminLogin = () => {
     setIsLoading(true);
     
     try {
-      const res = await fetch("http://localhost:5000/api/admin/login", {
+      const res = await fetch(`${API_URL}/api/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

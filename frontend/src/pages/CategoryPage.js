@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../styles/categoryPage.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const CategoryPage = () => {
   const { id } = useParams();
   const [category, setCategory] = useState(null);
@@ -13,20 +15,20 @@ const CategoryPage = () => {
     setLoading(true);
     
     // Fetch category details
-    fetch(`http://localhost:5000/api/categories/${id}`)
+    fetch(`${API_URL}/api/categories/${id}`)
       .then(res => res.json())
       .then(data => {
         setCategory(data);
         
         // Fetch subcategories for this category
-        return fetch(`http://localhost:5000/api/subcategories/${id}`);
+        return fetch(`${API_URL}/api/subcategories/${id}`);
       })
       .then(res => res.json())
       .then(subcatData => {
         setSubcategories(subcatData);
         
         // Fetch all places
-        return fetch("http://localhost:5000/api/places");
+        return fetch(`${API_URL}/api/places`);
       })
       .then(res => res.json())
       .then(allPlaces => {
@@ -92,7 +94,7 @@ const CategoryPage = () => {
                           <div className="place-item">
                             {place.image && (
                               <img 
-                                src={`http://localhost:5000${place.image}`} 
+                                src={`${API_URL}${place.image}`} 
                                 alt={place.name}
                                 className="place-thumb"
                               />
@@ -148,7 +150,7 @@ const CategoryPage = () => {
                   <div className="place-card">
                     {place.image && (
                       <img 
-                        src={`http://localhost:5000${place.image}`} 
+                        src={`${API_URL}${place.image}`} 
                         alt={place.name}
                         className="place-image"
                       />

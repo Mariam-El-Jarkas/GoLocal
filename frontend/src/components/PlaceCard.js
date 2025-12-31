@@ -7,11 +7,13 @@ import "../styles/placecard.css";
 
 function PlaceCard({ place }) {
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   return (
     <div className="place-card">
 
       {/* Image of the place */}
-<img src={`http://localhost:5000${place.image}`} alt={place.name} className="place-img" />
+<img src={`${API_URL}${place.image}`} alt={place.name} className="place-img" />
 
       {/* Content section: name, description, and link */}
       <div className="place-content">
