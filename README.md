@@ -28,94 +28,54 @@ Currently focused on **Saida**, the app is built with scalability in mind for fu
 
 ## 🧠 Tech Stack
 
-| Layer                  | Technology                      | Purpose                                        |
-|------------------------|---------------------------------|------------------------------------------------|
-| **Frontend Framework** | [React.js](https://react.dev/)  | Build the interactive user interface           |
-| **Styling**            | CSS                             | Custom styling for all components and layout   |
-| **Routing**            | React Router                    | Manage navigation between pages and categories |
-| **Deployment**         | GitHub Pages                    | Static hosting for the web application         |
+### **Frontend**
+| Technology | Purpose |
+|------------|---------|
+| [React.js](https://react.dev/) | Interactive user interface |
+| React Router | Client-side navigation |
+| CSS Modules | Component-specific styling |
+| Fetch API | REST API communication |
+
+### **Backend**
+| Technology | Purpose |
+|------------|---------|
+| Node.js | Server runtime |
+| Express.js | REST API framework |
+| PostgreSQL | Relational database |
+| pg (node-postgres) | Database connectivity |
+| CORS | Cross-origin resource sharing |
+
+### **Infrastructure**
+| Service | Purpose |
+|---------|---------|
+| Render.com | Backend API & Database hosting |
+| InfinityFree | Frontend static hosting |
+| PostgreSQL | Database management |
+
+---
+
+## 🚀 Live Deployment
+
+### **Frontend Application**
+🌐 **URL:** [https://golocal.infinityfree.me](https://golocal.infinityfree.me)
+
+### **Backend API**
+🔗 **Base URL:** [https://golocal-2xn2.onrender.com](https://golocal-2xn2.onrender.com)
+
+### **API Endpoints**
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/categories` | GET | Get all categories |
+| `/api/categories/:id` | GET | Get specific category |
+| `/api/subcategories/:categoryId` | GET | Get subcategories |
+| `/api/places` | GET | Get all places |
+| `/api/places/:id` | GET | Get specific place |
 
 ---
 
 ## 🗂️ Project Structure
 
-GOLOCAL/
-├── node_modules/
-├── public/
-├── src/
-│   ├── assets/
-│   │   └── images/
-│   │       ├── belt-meryam.png
-│   │       ├── blend.png
-│   │       ├── debbane-palace.png
-│   │       ├── dice-cafe.png
-│   │       ├── drop-cafe.png
-│   │       ├── heya.png
-│   │       ├── Logo.png
-│   │       ├── multiverse.png
-│   │       ├── oscar-mail.png
-│   │       ├── saida-country-club.png
-│   │       ├── saida.png
-│   │       ├── saint-louis-castle.png
-│   │       ├── saoudi-park.png
-│   │       ├── sea-castle.png
-│   │       ├── senor-pizza.png
-│   │       ├── sheikh-zayed-park.png
-│   │       ├── soap-museum.png
-│   │       ├── soubra.png
-│   │       ├── souk-saida.png
-│   │       ├── starbucks.png
-│   │       ├── stories.png
-│   │       ├── the-spot-saida.png
-│   │       └── toninos.png
-│   ├── components/
-│   │   ├── CategoryCard.js
-│   │   ├── Footer.js
-│   │   ├── Navbar.js
-│   │   ├── PlaceCard.js
-│   │   └── placesData.js
-│   ├── pages/
-│   │   ├── categories/
-│   │   │   ├── BoardGames.js
-│   │   │   ├── CoffeeShops.js
-│   │   │   ├── Culture.js
-│   │   │   ├── Food.js
-│   │   │   ├── History.js
-│   │   │   ├── Parks.js
-│   │   │   └── Shopping.js
-│   │   ├── About.js
-│   │   ├── categories.js
-│   │   ├── Contact.js
-│   │   ├── Home.js
-│   │   └── PlaceDetails.js
-│   ├── styles/
-│   │   ├── about.css
-│   │   ├── BoardGames.css
-│   │   ├── categories.css
-│   │   ├── categorycard.css
-│   │   ├── CoffeeShops.css
-│   │   ├── contact.css
-│   │   ├── Culture.css
-│   │   ├── details.css
-│   │   ├── food.css
-│   │   ├── footer.css
-│   │   ├── History.css
-│   │   ├── home.css
-│   │   ├── navbar.css
-│   │   ├── Parks.css
-│   │   ├── placecard.css
-│   │   ├── Shopping.css
-│   ├── App.css
-│   ├── App.js
-│   ├── index.js
-│   ├── logo.svg
-│   ├── reportWebVitals.js
-│   └── setupTests.js
-├── .gitignore
-├── package-lock.json
-├── package.json
-└── README.md
-
+//to be added
 
 ---
 
@@ -135,8 +95,7 @@ GoLocal currently covers (and can be expanded to include):
 
 ## 🚀 Future Enhancements
 
-- 🔹 Integrate **interactive maps** (Google Maps API or Leaflet).  
-- 🔹 Add **real-time database** for user-contributed locations.  
+- 🔹 Integrate **interactive maps** (Google Maps API or Leaflet).   
 - 🔹 Implement **search and filter** by category or rating.  
 - 🔹 Expand coverage to **Beirut, Tyre, Tripoli, and other Lebanese cities**.  
 - 🔹 Add **authentication** and user profiles for saving favorite spots.  
