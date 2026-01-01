@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/admin-dashboard.css";
 // ADD THIS IMPORT
 import { materialIcons } from "../components/materialIcons";
+import { API_URL, getImageUrl } from "../config/apiConfig";
 import {
   FaTachometerAlt,
   FaList,
@@ -24,8 +25,6 @@ import {
   FaInfoCircle,
   FaSync
 } from "react-icons/fa";
-
-const API_URL = process.env.REACT_APP_API_URL;
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -763,7 +762,7 @@ const AdminDashboard = () => {
                         <td>
                           <div className="table-item">
                            {place.image && (
-  <img src={`${API_URL}${place.image}`} alt={place.name} className="table-img" />
+  <img src={getImageUrl(place.image)} alt={place.name} className="table-img" />
 )}
                             <span>{place.name}</span>
                           </div>
@@ -1363,7 +1362,7 @@ const AdminDashboard = () => {
                       {editForm.originalImage ? (
                         <div style={{ marginBottom: '15px' }}>
                           <img
-                            src={editForm.originalImage}
+                            src={getImageUrl(editForm.originalImage)}
                             alt="Current"
                             style={{ maxWidth: '100px', maxHeight: '100px', border: '1px solid #ddd' }}
                           />

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../styles/contact.css";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from '../config/apiConfig';
 
 const Contact = () => {
   const [name, setName] = useState("");

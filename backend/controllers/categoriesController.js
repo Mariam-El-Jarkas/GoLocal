@@ -148,7 +148,8 @@ const getCategories = (req, res) => {
       console.error('❌ Database error:', err);
       return res.status(500).json({ message: 'Database error' });
     }
-    res.json(result);
+    // ⭐⭐ FIX: PostgreSQL returns data in result.rows, not result
+    res.json(result.rows); // CHANGE THIS LINE
   });
 };
 
@@ -156,17 +157,19 @@ const getCategories = (req, res) => {
 const getCategoryById = (req, res) => {
   const { id } = req.params;
   
-  db.query('SELECT * FROM categories WHERE id = ?', [id], (err, result) => {
+  // ⭐ FIX: PostgreSQL uses $1, not ?  
+  db.query('SELECT * FROM categories WHERE id = $1', [id], (err, result) => {
     if (err) {
       console.error('❌ Database error:', err);
       return res.status(500).json({ message: 'Database error' });
     }
     
-    if (result.length === 0) {
+    // ⭐ FIX: PostgreSQL uses result.rows
+    if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Category not found' });
     }
     
-    res.json(result[0]);
+    res.json(result.rows[0]); // CHANGE THIS
   });
 };
 
@@ -174,12 +177,13 @@ const getCategoryById = (req, res) => {
 const getPlacesByCategoryId = (req, res) => {
   const { id } = req.params;
   
-  db.query('SELECT * FROM places WHERE category_id = ?', [id], (err, result) => {
+  // ⭐ FIX: PostgreSQL uses $1
+  db.query('SELECT * FROM places WHERE category_id = $1', [id], (err, result) => {
     if (err) {
       console.error('❌ Database error:', err);
       return res.status(500).json({ message: 'Database error' });
     }
-    res.json(result);
+    res.json(result.rows); // CHANGE THIS
   });
 };
 
@@ -196,18 +200,20 @@ const addCategory = (req, res) => {
     return res.status(400).json({ message: 'Invalid icon name format' });
   }
 
+  // ⭐ FIX: PostgreSQL uses $1, $2 and RETURNING clause
   db.query(
-    'INSERT INTO categories (name, icon) VALUES (?, ?)',
+    'INSERT INTO categories (name, icon) VALUES ($1, $2) RETURNING id',
     [name, icon],
     (err, result) => {
       if (err) {
         console.error('❌ Database error:', err);
         return res.status(500).json({ message: 'Database error' });
       }
-      console.log('✅ Category inserted with ID:', result.insertId);
+      // ⭐ FIX: PostgreSQL returns id in result.rows[0].id
+      console.log('✅ Category inserted with ID:', result.rows[0].id);
       res.json({ 
         message: 'Category added successfully',
-        id: result.insertId,
+        id: result.rows[0].id,
         name: name,
         icon: icon
       });
@@ -231,19 +237,20 @@ const updateCategory = (req, res) => {
   }
 
   // First, get the current category to verify it exists
-  db.query('SELECT * FROM categories WHERE id = ?', [id], (err, result) => {
+  db.query('SELECT * FROM categories WHERE id = $1', [id], (err, result) => {
     if (err) {
       console.error('❌ Database error:', err);
       return res.status(500).json({ message: 'Database error' });
     }
     
-    if (result.length === 0) {
+    // ⭐ FIX: PostgreSQL uses result.rows
+    if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Category not found' });
     }
 
     // Now update the category
     db.query(
-      'UPDATE categories SET name = ?, icon = ? WHERE id = ?',
+      'UPDATE categories SET name = $1, icon = $2 WHERE id = $3 RETURNING *',
       [name, icon, id],
       (err, updateResult) => {
         if (err) {
@@ -251,7 +258,7 @@ const updateCategory = (req, res) => {
           return res.status(500).json({ message: 'Database error' });
         }
         
-        console.log('✅ Update affected rows:', updateResult.affectedRows);
+        console.log('✅ Update affected rows:', updateResult.rowCount);
         
         // Return the updated category data
         res.json({ 
@@ -259,7 +266,7 @@ const updateCategory = (req, res) => {
           id: id,
           name: name,
           icon: icon,
-          affectedRows: updateResult.affectedRows
+          affectedRows: updateResult.rowCount
         });
       }
     );
@@ -272,13 +279,14 @@ const deleteCategory = (req, res) => {
   console.log('🗑️ DELETE CATEGORY - ID:', id);
 
   // First check if category has places
-  db.query('SELECT COUNT(*) as placeCount FROM places WHERE category_id = ?', [id], (err, countResult) => {
+  db.query('SELECT COUNT(*) as placeCount FROM places WHERE category_id = $1', [id], (err, countResult) => {
     if (err) {
       console.error('❌ Database error:', err);
       return res.status(500).json({ message: 'Database error' });
     }
     
-    const placeCount = countResult[0].placeCount;
+    // ⭐ FIX: PostgreSQL uses countResult.rows[0].placecount
+    const placeCount = parseInt(countResult.rows[0].placecount) || 0;
     if (placeCount > 0) {
       return res.status(400).json({ 
         message: `Cannot delete category with ${placeCount} place(s). Delete the places first.` 
@@ -286,13 +294,14 @@ const deleteCategory = (req, res) => {
     }
     
     // Delete the category
-    db.query('DELETE FROM categories WHERE id = ?', [id], (err, result) => {
+    db.query('DELETE FROM categories WHERE id = $1 RETURNING *', [id], (err, result) => {
       if (err) {
         console.error('❌ Database error:', err);
         return res.status(500).json({ message: 'Database error' });
       }
       
-      if (result.affectedRows === 0) {
+      // ⭐ FIX: PostgreSQL uses result.rowCount
+      if (result.rowCount === 0) {
         return res.status(404).json({ message: 'Category not found' });
       }
       

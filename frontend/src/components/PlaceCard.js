@@ -2,18 +2,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/placecard.css";
+import { getImageUrl } from "../config/apiConfig";
 
 //used in home page
 
 function PlaceCard({ place }) {
 
-  const API_URL = process.env.REACT_APP_API_URL;
-
   return (
     <div className="place-card">
 
       {/* Image of the place */}
-<img src={`${API_URL}${place.image}`} alt={place.name} className="place-img" />
+<img src={getImageUrl(place.image)} alt={place.name} className="place-img" />
 
       {/* Content section: name, description, and link */}
       <div className="place-content">

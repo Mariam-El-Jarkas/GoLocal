@@ -3,17 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { FaArrowLeft } from "react-icons/fa";
+import { API_URL, getImageUrl } from "../config/apiConfig";
 
 const PlaceDetails = () => {
   const { id } = useParams();
   const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = process.env.REACT_APP_API_URL;
-
   useEffect(() => {
-    setLoading(true);
-    
     fetch(`${API_URL}/api/places/${id}`)
       .then(res => res.json())
       .then(placeData => {
@@ -123,7 +120,7 @@ const PlaceDetails = () => {
                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
               }}>
                 <img 
-                  src={`${API_URL}${place.image}`} 
+                  src={getImageUrl(place.image)} 
                   alt={place.name}
                   style={{ 
                     width: "100%", 

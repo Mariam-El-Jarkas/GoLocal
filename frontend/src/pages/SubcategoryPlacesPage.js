@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../styles/subcategoryPlaces.css";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL, getImageUrl } from "../config/apiConfig";
 const SubcategoryPlacesPage = () => {
   const { id } = useParams();
   const [subcategory, setSubcategory] = useState(null);
@@ -58,7 +57,7 @@ const SubcategoryPlacesPage = () => {
               <div className="place-card">
                 {place.image && (
                   <img 
-                    src={`${API_URL}${place.image}`} 
+                    src={getImageUrl(place.image)} 
                     alt={place.name}
                     className="place-image"
                   />

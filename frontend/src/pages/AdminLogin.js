@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/admin-login.css";
 import Navbar from "../components/Navbar";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import { API_URL } from '../config/apiConfig';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");

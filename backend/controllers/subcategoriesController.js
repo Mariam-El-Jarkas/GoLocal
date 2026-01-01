@@ -5,11 +5,11 @@ const getSubcategories = (req, res) => {
   const { categoryId } = req.params;
 
   db.query(
-    'SELECT * FROM subcategories WHERE category_id = ?',
+    'SELECT * FROM subcategories WHERE category_id = $1',
     [categoryId],
     (err, result) => {
       if (err) return res.status(500).json({ message: 'Database error' });
-      res.json(result);
+      res.json(result.rows);
     }
   );
 };
@@ -22,7 +22,7 @@ const getSubcategoryDetails = (req, res) => {
     `SELECT s.*, c.name as category_name 
      FROM subcategories s 
      LEFT JOIN categories c ON s.category_id = c.id 
-     WHERE s.id = ?`,
+     WHERE s.id = $1`,
     [id],
     (err, result) => {
       if (err) {
@@ -30,11 +30,11 @@ const getSubcategoryDetails = (req, res) => {
         return res.status(500).json({ message: 'Database error' });
       }
       
-      if (result.length === 0) {
+      if (result.rows.length === 0) {
         return res.status(404).json({ message: 'Subcategory not found' });
       }
       
-      res.json(result[0]);
+      res.json(result.rows[0]);
     }
   );
 };
@@ -44,16 +44,16 @@ const getSubcategoryInfo = (req, res) => {
   const { id } = req.params;
   
   db.query(
-    'SELECT * FROM subcategories WHERE id = ?',
+    'SELECT * FROM subcategories WHERE id = $1',
     [id],
     (err, result) => {
       if (err) return res.status(500).json({ message: 'Database error' });
       
-      if (result.length === 0) {
+      if (result.rows.length === 0) {
         return res.status(404).json({ message: 'Subcategory not found' });
       }
       
-      res.json(result[0]);
+      res.json(result.rows[0]);
     }
   );
 };
@@ -64,13 +64,13 @@ const addSubcategory = (req, res) => {
     return res.status(400).json({ message: 'Missing fields' });
 
   db.query(
-    'INSERT INTO subcategories (name, category_id) VALUES (?, ?)',
+    'INSERT INTO subcategories (name, category_id) VALUES ($1, $2) RETURNING id',
     [name, category_id],
     (err, result) => {
       if (err) return res.status(500).json({ message: 'Database error' });
       res.json({ 
         message: 'Subcategory added',
-        id: result.insertId
+        id: result.rows[0].id
       });
     }
   );
@@ -79,7 +79,7 @@ const addSubcategory = (req, res) => {
 const deleteSubcategory = (req, res) => {
   const { id } = req.params;
 
-  db.query('DELETE FROM subcategories WHERE id = ?', [id], (err) => {
+  db.query('DELETE FROM subcategories WHERE id = $1', [id], (err) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.json({ message: 'Subcategory deleted' });
   });
@@ -92,7 +92,7 @@ const getAllSubcategories = (req, res) => {
       console.error("Database error:", err);
       return res.status(500).json({ message: 'Database error' });
     }
-    res.json(result);
+    res.json(result.rows);
   });
 };
 
@@ -105,11 +105,11 @@ const updateSubcategory = (req, res) => {
     return res.status(400).json({ message: 'Missing fields' });
 
   db.query(
-    'UPDATE subcategories SET name = ?, category_id = ? WHERE id = ?',
+    'UPDATE subcategories SET name = $1, category_id = $2 WHERE id = $3',
     [name, category_id, id],
     (err, result) => {
       if (err) return res.status(500).json({ message: 'Database error' });
-      if (result.affectedRows === 0)
+      if (result.rowCount === 0)
         return res.status(404).json({ message: 'Subcategory not found' });
       res.json({ message: 'Subcategory updated successfully' });
     }

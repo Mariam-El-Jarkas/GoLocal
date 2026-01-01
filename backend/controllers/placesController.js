@@ -5,7 +5,7 @@ const path = require('path');
 const getPlaces = (req, res) => {
   db.query('SELECT * FROM places', (err, result) => {
     if (err) return res.status(500).json({ message: 'Database error' });
-    res.json(result);
+    res.json(result.rows);
   });
 };
 
@@ -13,17 +13,17 @@ const getPlaces = (req, res) => {
 const getPlaceById = (req, res) => {
   const { id } = req.params;
   
-  db.query('SELECT * FROM places WHERE id = ?', [id], (err, result) => {
+  db.query('SELECT * FROM places WHERE id = $1', [id], (err, result) => {
     if (err) {
       console.error('❌ Database error:', err);
       return res.status(500).json({ message: 'Database error' });
     }
     
-    if (result.length === 0) {
+    if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Place not found' });
     }
     
-    res.json(result[0]);
+    res.json(result.rows[0]);
   });
 };
 
@@ -31,17 +31,17 @@ const getPlaceById = (req, res) => {
 const getSubcategoryDetails = (req, res) => {
   const { id } = req.params;
   
-  db.query('SELECT * FROM subcategories WHERE id = ?', [id], (err, result) => {
+  db.query('SELECT * FROM subcategories WHERE id = $1', [id], (err, result) => {
     if (err) {
       console.error('❌ Database error:', err);
       return res.status(500).json({ message: 'Database error' });
     }
     
-    if (result.length === 0) {
+    if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Subcategory not found' });
     }
     
-    res.json(result[0]);
+    res.json(result.rows[0]);
   });
 };
 
@@ -76,12 +76,12 @@ const addPlace = (req, res) => {
     // If no category_name provided, try to get it from database
     if ((!category_name || category_name === 'category') && category_id) {
       // Try to get category name from database
-      db.query('SELECT name FROM categories WHERE id = ?', [category_id], (err, categoryResult) => {
+      db.query('SELECT name FROM categories WHERE id = $1', [category_id], (err, categoryResult) => {
         if (err) {
           console.error('Error fetching category:', err);
           proceedWithRenaming();
-        } else if (categoryResult.length > 0) {
-          categoryName = categoryResult[0].name;
+        } else if (categoryResult.rows.length > 0) {
+          categoryName = categoryResult.rows[0].name;
           proceedWithRenaming();
         } else {
           proceedWithRenaming();
@@ -124,12 +124,12 @@ const addPlace = (req, res) => {
     const cleanSubcategoryId = subcategory_id || null;
 
     db.query(
-      'INSERT INTO places (name, description, address, image, category_id, subcategory_id) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO places (name, description, address, image, category_id, subcategory_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
       [name, cleanDescription, cleanAddress, image, cleanCategoryId, cleanSubcategoryId],
       (err, result) => {
         if (err) {
           console.error("Database error:", err);
-          if (err.code === 'ER_NO_REFERENCED_ROW_2') {
+          if (err.code === '23503') {
             return res.status(400).json({ 
               message: 'Category or subcategory does not exist' 
             });
@@ -140,7 +140,7 @@ const addPlace = (req, res) => {
         }
         res.json({ 
           message: 'Place added successfully',
-          id: result.insertId,
+          id: result.rows[0].id,
           image: image
         });
       }
@@ -171,12 +171,12 @@ const updatePlace = (req, res) => {
     let categoryName = category_name || 'category';
     
     if ((!category_name || category_name === 'category') && category_id) {
-      db.query('SELECT name FROM categories WHERE id = ?', [category_id], (err, categoryResult) => {
+      db.query('SELECT name FROM categories WHERE id = $1', [category_id], (err, categoryResult) => {
         if (err) {
           console.error('Error fetching category:', err);
           proceedWithUpdateRenaming();
-        } else if (categoryResult.length > 0) {
-          categoryName = categoryResult[0].name;
+        } else if (categoryResult.rows.length > 0) {
+          categoryName = categoryResult.rows[0].name;
           proceedWithUpdateRenaming();
         } else {
           proceedWithUpdateRenaming();
@@ -229,14 +229,14 @@ const updatePlace = (req, res) => {
     const cleanSubcategoryId = subcategory_id || null;
 
     db.query(
-      'UPDATE places SET name = ?, description = ?, address = ?, image = ?, category_id = ?, subcategory_id = ? WHERE id = ?',
+      'UPDATE places SET name = $1, description = $2, address = $3, image = $4, category_id = $5, subcategory_id = $6 WHERE id = $7',
       [name, cleanDescription, cleanAddress, image, cleanCategoryId, cleanSubcategoryId, id],
       (err, result) => {
         if (err) {
           console.error("Update error:", err);
           return res.status(500).json({ message: 'Database error' });
         }
-        if (result.affectedRows === 0)
+        if (result.rowCount === 0)
           return res.status(404).json({ message: 'Place not found' });
         res.json({ 
           message: 'Place updated successfully',
@@ -250,11 +250,11 @@ const updatePlace = (req, res) => {
 const deletePlace = (req, res) => {
   const { id } = req.params;
 
-  db.query('SELECT image FROM places WHERE id = ?', [id], (err, result) => {
+  db.query('SELECT image FROM places WHERE id = $1', [id], (err, result) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     
-    if (result.length > 0 && result[0].image) {
-      const imagePath = result[0].image.replace('/uploads/', '');
+    if (result.rows.length > 0 && result.rows[0].image) {
+      const imagePath = result.rows[0].image.replace('/uploads/', '');
       const fullPath = path.join(__dirname, '..', 'uploads', imagePath);
       if (fs.existsSync(fullPath)) {
         fs.unlink(fullPath, (err) => {
@@ -263,7 +263,7 @@ const deletePlace = (req, res) => {
       }
     }
     
-    db.query('DELETE FROM places WHERE id = ?', [id], (err) => {
+    db.query('DELETE FROM places WHERE id = $1', [id], (err) => {
       if (err) return res.status(500).json({ message: 'Database error' });
       res.json({ message: 'Place deleted' });
     });

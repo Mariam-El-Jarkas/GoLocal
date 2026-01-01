@@ -29,3 +29,4 @@ pool.query('SELECT 1')
   .catch(err => console.error('❌ PostgreSQL connection error:', err));
 
 module.exports = pool;
+
