@@ -13,8 +13,8 @@ const {
 router.get('/', getCategories);
 router.get('/:id', getCategoryById);
 router.get('/:id/places', getPlacesByCategoryId);
-router.post('/add', addCategory); // No upload.single needed anymore
+router.post('/add', addCategory);
 router.delete('/delete/:id', deleteCategory);
-router.put('/update/:id', updateCategory); // No upload.single needed anymore
+router.put('/update/:id', updateCategory);
 
 module.exports = router;

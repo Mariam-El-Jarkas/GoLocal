@@ -27,7 +27,7 @@ const {
 // Routes
 router.get('/', getPlaces);
 router.get('/:id', getPlaceById);
-router.get('/:id/details', getSubcategoryDetails); // This line should work now
+router.get('/:id/details', getSubcategoryDetails); 
 router.post('/add', upload.single('image'), addPlace);
 router.delete('/delete/:id', deletePlace);
 router.put('/update/:id', upload.single('image'), updatePlace);

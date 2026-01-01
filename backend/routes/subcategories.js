@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const {
   getSubcategories,
-  getSubcategoryDetails,  // ADD THIS IMPORT
-  getSubcategoryInfo,     // ADD THIS IMPORT
+  getSubcategoryDetails, 
+  getSubcategoryInfo,    
   getAllSubcategories,
   addSubcategory,
   deleteSubcategory,
@@ -12,8 +12,8 @@ const {
 
 // Routes
 router.get('/:categoryId', getSubcategories);
-router.get('/:id/details', getSubcategoryDetails);     // ADD THIS ROUTE
-router.get('/:id/info', getSubcategoryInfo);           // ADD THIS ROUTE (fallback)
+router.get('/:id/details', getSubcategoryDetails);  
+router.get('/:id/info', getSubcategoryInfo);        
 router.get('/', getAllSubcategories);
 router.post('/add', addSubcategory);
 router.delete('/delete/:id', deleteSubcategory);
